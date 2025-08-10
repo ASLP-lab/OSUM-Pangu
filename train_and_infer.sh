@@ -1,9 +1,5 @@
 #!/bin/bash
-# source /home/work_nfs11/code/xlgeng/environment/miniconda/etc/profile.d/conda.sh
-# conda activate gxl_base
 
-# Copyright 2019 Mobvoi Inc. All Rights Reserved.
-. ./path.sh || exit 1;
 
 # Automatically detect number of gpus
 if command -v nvidia-smi &> /dev/null; then
@@ -47,10 +43,10 @@ num_nodes=1
 job_id=2023
 
 train_config=conf/ct_config.yaml
-gxl_data_json_info_path_s2t=conf/ct_data_s2t.yaml
-gxl_data_json_info_path_t2s=conf/ct_data_t2s.yaml
-gxl_data_json_info_path_s2s=conf/ct_data_s2s.yaml
-gxl_data_json_info_path_t2t=conf/ct_data_t2t.yaml
+gxl_data_json_info_path_s2t=conf/data_s2t.yaml
+gxl_data_json_info_path_t2s=conf/data_t2s.yaml
+gxl_data_json_info_path_s2s=conf/data_s2s.yaml
+gxl_data_json_info_path_t2t=conf/data_t2t.yaml
 
 
 
@@ -82,7 +78,7 @@ python common_utils/load_combine_type_yaml.py $gxl_data_json_info_path_t2t $trai
 # train_data=conf/asr_data4huawei.list
 cv_data=$data/asr_cv.list
 head -n 1 $train_data_s2t > $cv_data
-exit 0
+#exit 0
 
 
 

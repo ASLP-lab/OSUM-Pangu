@@ -110,6 +110,15 @@ def url_opener(data):
         assert 'src' in sample
         # TODO(Binbin Zhang): support HTTP
         url = sample['src']
+        combine_path, shard_path = url.split('|')
+        if combine_path == "-":
+            big_dict = {}
+            pass
+        else:
+            dict_list = utils_file.load_dict_list_from_jsonl(combine_path)
+            big_dict = None
+            for item in dict_list:
+                big_dict[item['key']] = item
         try:
             pr = urlparse(url)
             # local file
@@ -121,7 +130,7 @@ def url_opener(data):
                 process = Popen(cmd, shell=True, stdout=PIPE)
                 sample.update(process=process)
                 stream = process.stdout
-            sample.update(stream=stream)
+            sample.update(stream=stream,big_dict=big_dict)
             yield sample
         except Exception as ex:
             logging.warning('Failed to open {}'.format(url))
@@ -211,6 +220,7 @@ def tar_file_and_group_full_data(data, total_num=0):
         stream = None
         try:
             stream = tarfile.open(fileobj=sample['stream'], mode="r:*")
+            big_dict = sample['big_dict']
             prev_prefix = None
             example = {'history': []}
             valid = True
@@ -234,76 +244,43 @@ def tar_file_and_group_full_data(data, total_num=0):
                     valid = True
                 with stream.extractfile(tarinfo) as file_obj:
                     try:
-                        if postfix == 'txt':
-                            example['txt'] = file_obj.read().decode(
-                                'utf8').strip()
-                        elif check_wav_format(postfix)[0]:
-                            position = check_wav_format(postfix)[1]
-                            waveform, sample_rate = torchaudio.load(file_obj)
-                            if sample_rate!= 16000:
-                                waveform= torchaudio.transforms.Resample(
-                                    orig_freq=sample_rate, new_freq=16000)(waveform)
-                            feat = do_compute_log_mel_spectrogram(waveform)
-                            history_item = {'wav': feat, "txt":"",'position': position}
-                            insert_at_position(example['history'], history_item, position, is_wav=True)
-                        elif check_txt_format(postfix)[0]:
-                            position = check_txt_format(postfix)[1]
-                            txt_str = file_obj.read().decode(
-                                'utf8').strip()
-                            history_item = {'wav': '', "txt":txt_str,'position': position}
-                            insert_at_position(example['history'], history_item, position, is_wav=False)
-                        elif postfix == 'lang':
-                            try:
-                                example['lang'] = file_obj.read().decode(
-                                    'utf8').strip()
-                            except Exception as ex:
-                                example['lang'] = "none"
-                        elif postfix == 'speaker':
-                            try:
-                                example['speaker'] = file_obj.read().decode(
-                                    'utf8').strip()
-                            except Exception as ex:
-                                example['speaker'] = "none"
-                        elif postfix == 'emotion':
-                            try:
-                                example['emotion'] = file_obj.read().decode(
-                                    'utf8').strip()
-                            except Exception as ex:
-                                example['emotion'] = "none"
-                        elif postfix == 'gender':
-                            try:
-                                example['gender'] = file_obj.read().decode(
-                                    'utf8').strip()
-                            except Exception as ex:
-                                example['gender'] = "none"
-                        elif postfix == 'task':
-                            example['task'] = file_obj.read().decode(
-                                'utf8').strip()
-                        elif postfix == 'speech_token':
-                            example['speech_token'] = file_obj.read().decode(
-                                'utf8').strip()
-                        elif postfix == 'duration':
-                            try:
-                                duration_str = file_obj.read().decode(
-                                    'utf8').strip()
-                                duration_float = float(duration_str)
-                                example['duration'] = duration_float
-                            except Exception as ex:
-                                logging.warning(f'error to parse duration {duration_str}')
-                                example['duration'] = 0
-
-                        elif postfix in AUDIO_FORMAT_SETS:
-                            waveform, sample_rate = torchaudio.load(file_obj)
-                            # 检查音频的维度
-                            num_channels = waveform.shape[0]
-                            # 如果音频是多通道的，则进行通道平均
-                            if num_channels > 1:
-                                waveform = torch.mean(waveform, dim=0, keepdim=True)
-                            example['wav'] = waveform
-                            example['sample_rate'] = sample_rate
+                        if big_dict is not None:
+                            if postfix == 'txt':
+                                example['txt'] = big_dict[postfix]['txt']
+                            elif postfix == 'task':
+                                example['task'] = big_dict[postfix]['task']
+                            elif postfix == 'extra':
+                                example['extra'] = big_dict[postfix]['extra']
+                            elif postfix in AUDIO_FORMAT_SETS:
+                                waveform, sample_rate = torchaudio.load(file_obj)
+                                # 检查音频的维度
+                                num_channels = waveform.shape[0]
+                                # 如果音频是多通道的，则进行通道平均
+                                if num_channels > 1:
+                                    waveform = torch.mean(waveform, dim=0, keepdim=True)
+                                example['wav'] = waveform
+                                example['sample_rate'] = sample_rate
+                            else:
+                                pass
                         else:
-                            example[postfix] = file_obj.read().decode(
-                                'utf8').strip()
+                            if postfix == 'txt':
+                                example['txt'] = file_obj.read().decode('utf8').strip()
+                            elif postfix == 'task':
+                                example['task'] = file_obj.read().decode('utf8').strip()
+                            elif postfix == 'extra':
+                                extra_str = file_obj.read().decode('utf8').strip()
+                                example['extra'] = json.loads(extra_str)
+                            elif postfix in AUDIO_FORMAT_SETS:
+                                waveform, sample_rate = torchaudio.load(file_obj)
+                                # 检查音频的维度
+                                num_channels = waveform.shape[0]
+                                # 如果音频是多通道的，则进行通道平均
+                                if num_channels > 1:
+                                    waveform = torch.mean(waveform, dim=0, keepdim=True)
+                                example['wav'] = waveform
+                                example['sample_rate'] = sample_rate
+                            else:
+                                pass
                     except Exception as ex:
                         valid = False
                         logging.warning(f'error to parse {name} 错误！!:{ex}')
@@ -316,7 +293,6 @@ def tar_file_and_group_full_data(data, total_num=0):
                         example['sample_rate'] = 16000
                     utils_file.logging_info(f'*************OSUM-EChat SHUCHU第{index}/{total_num}个tar包')
                     yield example
-
         except Exception as ex:
             logging.warning(
                 'In tar_file_and_group: {} when processing {}'.format(
@@ -327,6 +303,24 @@ def tar_file_and_group_full_data(data, total_num=0):
             if 'process' in sample:
                 sample['process'].communicate()
             sample['stream'].close()
+
+# for history
+# elif check_wav_format(postfix)[0]:
+# position = check_wav_format(postfix)[1]
+# waveform, sample_rate = torchaudio.load(file_obj)
+# if sample_rate != 16000:
+# waveform = torchaudio.transforms.Resample(
+#     orig_freq=sample_rate, new_freq=16000)(waveform)
+# feat = do_compute_log_mel_spectrogram(waveform)
+# history_item = {'wav': feat, "txt": "", 'position': position}
+# insert_at_position(example['history'], history_item, position, is_wav=True)
+#
+# elif check_txt_format(postfix)[0]:
+# position = check_txt_format(postfix)[1]
+# txt_str = file_obj.read().decode(
+# 'utf8').strip()
+# history_item = {'wav': '', "txt": txt_str, 'position': position}
+# insert_at_position(example['history'], history_item, position, is_wav=False)
 
 
 def parse_raw(data):

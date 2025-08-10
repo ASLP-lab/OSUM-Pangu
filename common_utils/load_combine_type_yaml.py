@@ -34,13 +34,16 @@ for data_info in data_info_dict.values():
     else:
         final_data_list_i = utils_file.load_list_file_clean(data_path_i) * data_weight
     # 判断数据类型
-    if "combine_list.txt" in data_path_i:
+    if "combines_list.txt" in data_path_i:
         print(f'是 combine类型的数据')
-        tar_root_path = data_path_i.replace('combine_list.txt', 'combines_tar_root.txt')
+        tar_root_path = data_path_i.replace('combines_list.txt', 'combines_tar_root.txt')
         if not os.path.exists(tar_root_path):
             utils_file.logging_info(f'combine_list.txt:{data_path_i} 对应的 combines_tar_root.txt:{tar_root_path} 不存在')
             continue
         tar_root = utils_file.load_first_row_clean(tar_root_path)
+        if tar_root.endswith('/'):
+            tar_root = tar_root[:-1]
+        utils_file.logging_info(f' tar_root:{tar_root}')
         new_final_data_list_i = []
         for data_path_j in final_data_list_i:
             # "combine_path|shard_path"
