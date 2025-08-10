@@ -1,0 +1,104 @@
+#  ===========================副语言 s2t thinking ===================================
+
+# age gender,
+age_gender_common:
+  combine_path: /home/A02_tmpdata3/osum_s2s/gender/xlgeng_new_data/s2t_thinking/combines_list.txt
+  tar_num: 1511
+
+gender_xianshi:
+  combine_path: /home/A02_tmpdata3/osum_s2s/sex_xianshi_cosyvoice2_by_cywang_added_by_20250625/raw_data/s2s_handle/xlgeng_new_data/s2t_thinking/combines_list.txt
+  tar_num: 30
+
+gender_yinshi_3k:
+  combine_path: /home/A02_tmpdata3/osum_s2s/S2SChat_sex_yinshi_7_4_osum_by_cywang_added_by_20250708/raw_data/s2s_handle/xlgeng_new_data/s2t_thinking/combines_list.txt
+  tar_num: 3
+
+gender_yinshi_5k:
+  combine_path: /home/A02_tmpdata3/osum_s2s/S2SChat_sex_yinshi_5000_6_13_data_by_gjli_added_by_20250622/raw_data/s2s_handle/xlgeng_new_data/s2t_thinking/combines_list.txt
+  tar_num: 6
+
+age_xianshi:
+  combine_path: /home/A02_tmpdata3/osum_s2s/age_xianshi_cosyvoice2_by_cywang_added_by_20250625/raw_data/s2s_handle/xlgeng_new_data/s2t_thinking/combines_list.txt
+  tar_num: 25
+
+
+# caption
+caption_common_7label:
+  combine_path: /home/A02_tmpdata3/osum_s2s/caption/raw_data/xlgeng_new_data/s2t_thinking/combines_list.txt
+  tar_num: 162
+
+caption_common_50_label:
+  combine_path: /home/A02_tmpdata3/osum_s2s/caption_add_2025_1_6/raw_data/s2s_data_with_gender/xlgeng_new_data/s2t_thinking/combines_list.txt
+  tar_num: 395  # 实际是196k
+
+caption_xianshi:
+  combine_path: /home/A02_tmpdata3/osum_s2s/caption_s2s_xianshi_20250806/raw_data/s2s_data/xlgeng_new_data/s2t_thinking/combines_list.txt
+  tar_num: 6
+
+
+# emotion
+emotion_100K:
+  combine_path: /home/A02_tmpdata3/osum_s2s/emotion_yinshi_zxzhao_with_q_emo_by_cywang_added_by_20250701/handle_data/s2s_handle/xlgeng_new_data/s2t_thinking/combines_list.txt
+  tar_num: 107
+
+emotion_30K:
+  combine_path: /home/A02_tmpdata3/emotion/中英混多音色情感数据库/s2s_handle/xlgeng_new_data/s2t_thinking/combines_list.txt
+  tar_num: 33
+
+# ======================================s2t 副语言 thinking end=====================================
+
+# ======================================s2t 副语言 no thinking ======================================
+# age gender,
+age_gender_common_no_thinking:
+  combine_path: /home/A02_tmpdata3/osum_s2s/gender/xlgeng_new_data/s2t_no_thinking/combines_list.txt
+  tar_num: 1511
+
+gender_xianshi_no_thinking:
+  combine_path: /home/A02_tmpdata3/osum_s2s/sex_xianshi_cosyvoice2_by_cywang_added_by_20250625/raw_data/s2s_handle/xlgeng_new_data/s2t_no_thinking/combines_list.txt
+  tar_num: 30
+
+gender_yinshi_3k_no_thinking:
+  combine_path: /home/A02_tmpdata3/osum_s2s/S2SChat_sex_yinshi_7_4_osum_by_cywang_added_by_20250708/raw_data/s2s_handle/xlgeng_new_data/s2t_no_thinking/combines_list.txt
+  tar_num: 3
+
+gender_yinshi_5k_no_thinking:
+  combine_path: /home/A02_tmpdata3/osum_s2s/S2SChat_sex_yinshi_5000_6_13_data_by_gjli_added_by_20250622/raw_data/s2s_handle/xlgeng_new_data/s2t_no_thinking/combines_list.txt
+  tar_num: 6
+
+age_xianshi_no_thinking:
+  combine_path: /home/A02_tmpdata3/osum_s2s/age_xianshi_cosyvoice2_by_cywang_added_by_20250625/raw_data/s2s_handle/xlgeng_new_data/s2t_no_thinking/combines_list.txt
+  tar_num: 25
+
+
+# caption
+caption_common_7label_no_thinking:
+  combine_path: /home/A02_tmpdata3/osum_s2s/caption/raw_data/xlgeng_new_data/s2t_no_thinking/combines_list.txt
+  tar_num: 162
+
+caption_common_50_label_no_thinking:
+  combine_path: /home/A02_tmpdata3/osum_s2s/caption_add_2025_1_6/raw_data/s2s_data_with_gender/xlgeng_new_data/s2t_no_thinking/combines_list.txt
+  tar_num: 395  # 实际是196k
+
+caption_xianshi_no_thinking:
+  combine_path: /home/A02_tmpdata3/osum_s2s/caption_s2s_xianshi_20250806/raw_data/s2s_data/xlgeng_new_data/s2t_no_thinking/combines_list.txt
+  tar_num: 6
+
+
+# emotion
+emotion_100K_no_thinking:
+  combine_path: /home/A02_tmpdata3/osum_s2s/emotion_yinshi_zxzhao_with_q_emo_by_cywang_added_by_20250701/handle_data/s2s_handle/xlgeng_new_data/s2t_no_thinking/combines_list.txt
+  tar_num: 107
+emotion_30K_no_thinking:
+  combine_path: /home/A02_tmpdata3/emotion/中英混多音色情感数据库/s2s_handle/xlgeng_new_data/s2t_no_thinking/combines_list.txt
+  tar_num: 33
+
+
+# 知识问答
+S2SChat_syndata_merged_by_300W_zhguo_added_by_20250616:
+  combine_path: /home/A02_tmpdata3/osum_s2s/S2SChat_syndata_merged_by_300W_zhguo_added_by_20250616/combines_data_s2t/combines_list.txt
+  tar_num: 3000
+S2SChat_osum_total_data_lst_check_final_100W_by_zhguo_added_by_20250616:
+  combine_path: /home/A02_tmpdata3/osum_s2s/S2SChat_osum_total_data_lst_check_final_100W_by_zhguo_added_by_20250616/combines_data_s2t/combines_list.txt
+  tar_num: 1000
+# ======================================s2t 副语言 no thinking end==========================
+

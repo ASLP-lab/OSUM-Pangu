@@ -1,0 +1,5 @@
+__pycache__/*
+*.pyc
+examples/wenetspeech/tts/data/output_data/
+*.log
+.idea/
