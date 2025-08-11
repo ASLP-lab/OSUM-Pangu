@@ -77,10 +77,12 @@ caption_xianshi_sensevoice:
 emotion_100K_sensevoice:
   path: /home/A02_tmpdata3/osum_s2s/emotion_yinshi_zxzhao_with_q_emo_by_cywang_added_by_20250701/handle_data/s2s_handle/xlgeng_new_data/s2s_thinking/doubao/combines_list.txt
   tar_num: 107
+  weight: 10
 
 emotion_30K_sensevoice:
   path: /home/A02_tmpdata3/emotion/中英混多音色情感数据库/s2s_handle/xlgeng_new_data/s2s_thinking/doubao/combines_list.txt
   tar_num: 33
+  weight: 10
 
 # ======================================s2s 副语言 thinking end=====================================
 
@@ -175,9 +177,11 @@ emotion_30K_sensevoice_no_thinking:
 S2SChat_syndata_merged_by_300W_zhguo_added_by_20250616:
   path: /home/A02_tmpdata3/osum_s2s/S2SChat_syndata_merged_by_300W_zhguo_added_by_20250616/combines_data_s2s/combines_list.txt
   tar_num: 3000
+  weight: 10
 S2SChat_osum_total_data_lst_check_final_100W_by_zhguo_added_by_20250616:
   path: /home/A02_tmpdata3/osum_s2s/S2SChat_osum_total_data_lst_check_final_100W_by_zhguo_added_by_20250616/combines_data_s2s/combines_list.txt
   tar_num: 1000
+  weight: 10
 
 gaozhiliang_gbma:
   path: /home/A02_tmpdata3/osum_s2s/gaozhiliang_gbma/shards_list.txt

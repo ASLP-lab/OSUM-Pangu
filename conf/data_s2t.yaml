@@ -40,10 +40,12 @@ caption_xianshi:
 emotion_100K:
   path: /home/A02_tmpdata3/osum_s2s/emotion_yinshi_zxzhao_with_q_emo_by_cywang_added_by_20250701/handle_data/s2s_handle/xlgeng_new_data/s2t_thinking/combines_list.txt
   tar_num: 107
+  weight: 10
 
 emotion_30K:
   path: /home/A02_tmpdata3/emotion/中英混多音色情感数据库/s2s_handle/xlgeng_new_data/s2t_thinking/combines_list.txt
   tar_num: 33
+  weight: 10
 
 # ======================================s2t 副语言 thinking end=====================================
 
@@ -88,9 +90,11 @@ caption_xianshi_no_thinking:
 emotion_100K_no_thinking:
   path: /home/A02_tmpdata3/osum_s2s/emotion_yinshi_zxzhao_with_q_emo_by_cywang_added_by_20250701/handle_data/s2s_handle/xlgeng_new_data/s2t_no_thinking/combines_list.txt
   tar_num: 107
+  weight: 10
 emotion_30K_no_thinking:
   path: /home/A02_tmpdata3/emotion/中英混多音色情感数据库/s2s_handle/xlgeng_new_data/s2t_no_thinking/combines_list.txt
   tar_num: 33
+  weight: 10
 
 
 # 知识问答

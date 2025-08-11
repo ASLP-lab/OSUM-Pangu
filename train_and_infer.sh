@@ -44,7 +44,7 @@ num_nodes=1
 job_id=2023
 
 train_config=conf/ct_config.yaml
-gxl_data_json_info_path_s2t=conf/data_s2t_tmp.yaml
+gxl_data_json_info_path_s2t=conf/data_s2t.yaml
 gxl_data_json_info_path_t2s=conf/data_t2s.yaml
 gxl_data_json_info_path_s2s=conf/data_s2s.yaml
 gxl_data_json_info_path_t2t=conf/data_t2t.yaml
@@ -52,7 +52,7 @@ gxl_data_json_info_path_t2t=conf/data_t2t.yaml
 
 
 # dir=$exp_path/qwen2_multi_task_4_6gpus_gxl_adapter/epoch_12_13_with_speech_gxl_with_asr-chat
-dir=/home/A02_tmpdata3/ckpt/osum_chat_new_start_0810/epoch0_s2t_t2s_t2t_s2s_language_think
+dir=/home/A02_tmpdata2/ckpt/osum_chat_new_start_0810/epoch0_s2t_t2s_t2t_s2s_language_think
 #checkpoint=/home/A02_tmpdata3/ckpt/osum_chat/epoch0_all_data/step_10624.pt
 #checkpoint=/home/A02_tmpdata3/ckpt/osum_chat/epoch0_all_data/step_14374.pt
 #checkpoint=/home/A02_tmpdata3/ckpt/osum_chat/epoch1_all_data/step_2816.pt

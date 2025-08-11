@@ -34,7 +34,7 @@ Alpaca_CoT_3000W_by_wjt_added_by_20250605:
   shard_num: 30000
   path_huawei: "/mnt/sfs/asr/update_data/Alpaca_CoT_3000W_by_wjt_added_by_20250605/shards_list.txt"
   path: "/home/A03_tmpdata1/text2text_data_xlgeng/Alpaca-CoT_3000W/shards_list.txt"
-  weight: 0.05
+  weight: 0.15
 
 
 qwenomni_bench_data:
