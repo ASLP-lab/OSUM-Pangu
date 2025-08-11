@@ -19,7 +19,7 @@ from wenet.finetune.lora.utils import (inject_lora_to_model,
                                        mark_only_lora_as_trainable)
 from wenet.k2.model import K2Model
 from wenet.llm_asr.init_llmasr import init_llmasr
-from wenet.llm_asr_only_ctc.init_only_ctc import init_only_ctc
+# from wenet.llm_asr_only_ctc.init_only_ctc import init_only_ctc
 from wenet.paraformer.cif import Cif
 from wenet.paraformer.layers import SanmDecoder, SanmEncoder
 from wenet.paraformer.paraformer import Paraformer, Predictor
@@ -200,9 +200,9 @@ def init_model(args, configs):
         is_inference =configs.get('is_inference', False)
         model = init_llmasr(args, configs, is_inference=is_inference)
         return model
-    elif model_type == "only_ctc":
-        model = init_only_ctc(args, configs)
-        return model
+    # elif model_type == "only_ctc":
+    #     model = init_only_ctc(args, configs)
+    #     return model
     else:
         model, configs = init_speech_model(args, configs)
 

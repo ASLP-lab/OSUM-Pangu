@@ -2,7 +2,7 @@ import logging
 
 import torch
 from wenet.llm_asr.llmasr_model_instruct_version import LLMASR_Model as LLMASR_Model_Instruct
-from wenet.llm_asr.llmasr_model_base_version import LLMASR_Model as LLMASR_Model_Base
+# from wenet.llm_asr.llmasr_model_base_version import LLMASR_Model as LLMASR_Model_Base
 from wenet.transformer.cmvn import GlobalCMVN
 from wenet.utils.checkpoint import load_checkpoint, load_trained_modules
 from wenet.utils.cmvn import load_cmvn
@@ -39,7 +39,7 @@ def init_llmasr(args, configs, is_inference=False):
     train_speech_out = speech_token_num != 0
 
     if_instruct = configs.get('if_instruct', False)
-    BIGMODEL = LLMASR_Model_Instruct if if_instruct else LLMASR_Model_Base
+    BIGMODEL = LLMASR_Model_Instruct
     model = BIGMODEL(
         encoder=encoder,
         encoder_output_dim=encoder_output_dim,

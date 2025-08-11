@@ -18,6 +18,7 @@ export TASK_QUEUE_ENABLE=2 # 优化下发队列
 export CUDA_VISIBLE_DEVICES="0,1,2,3,4,5,6,7"
 #export CUDA_VISIBLE_DEVICES="2"
 echo "CUDA_VISIBLE_DEVICES is ${CUDA_VISIBLE_DEVICES}"
+export PYTHONPATH=./
 
 cuda_visible_devices=${CUDA_VISIBLE_DEVICES:-""}
 if [ -z "$cuda_visible_devices" ]; then
@@ -36,7 +37,7 @@ stop_stage=0
 # You should change the following two parameters for multiple machine training,
 # see https://pytorch.org/docs/stable/elastic/run.html
 #HOST_NODE_ADDR=192.168.0.38
-HOST_NODE_ADDR=10.21.4.2
+HOST_NODE_ADDR=10.21.4.3
 HOST_PORT=29408
 # HOST_NODE_ADDR="127.0.0.1:29401"
 num_nodes=1
@@ -65,7 +66,7 @@ data=$dir/data
 mkdir -p $data
 
 
-data_type=combine_type
+data_type=shard_full_data
 train_data_s2t=$data/tmp/tmp_master_s2t.list
 train_data_t2s=$data/tmp/tmp_master_t2s.list
 train_data_s2s=$data/tmp/tmp_master_s2s.list

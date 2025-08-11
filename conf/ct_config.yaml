@@ -1,7 +1,7 @@
 model: llmasr
 
 # llm_path
-llm_path: &llm_path "/**/Qwen2.5-3B-Instruct"
+llm_path: &llm_path "/home/A02_tmpdata3/ckpt/Qwen2.5-3B-Instruct"
 #
 # model config
 downsample_rate: 4 # 1 2 4 8
@@ -9,7 +9,7 @@ adapter_type: osum_echat
 if_instruct: true
 input_dim: 80
 
-# tokenizer ,osum_echat
+# tokenizer ,gxl
 tokenizer: huggingface
 tokenizer_conf:
   llm_path: *llm_path
@@ -125,7 +125,7 @@ dataset_conf:
       enable: true
       rate: 0.5 # 1.0 表示100%的句子随机替换为其only X
     use_think_mode:
-      enable: true # 开启think 模式, 即随机替换为think模式的句子
+      enable: false # 开启think 模式, 即随机替换为think模式的句子
       rate: 0.8
   other_filter_conf:
     fiter_txt_is_None: true # 过滤掉text is "<NONE>"的语音数据,适配由于gender数据部分含有<NONE>标签而设计。但仅train起作用

@@ -622,6 +622,52 @@ def tokenize(data, tokenizer: HuggingFaceTokenizer, other_tokenze_conf={}, globa
         # ================补丁处理结束 ==============================================
 
         unk_tag = "<&&>"  # 对应数字为 27,7672,29,...
+        # =============================== 对理解任务做处理 ,只在s2s dataset中做处理，转成s2s任务========================
+        # if task_name in asr_X_set:  # {"<TRANSCRIBE> <EMOTION>", "<TRANSCRIBE> <STYLE>", "<TRANSCRIBE> <CAPTION>", "<TRANSCRIBE> <GENDER>", "<TRANSCRIBE> <AGE>"}
+        #     """"""
+        #     if other_tokenze_conf.get('use_think_mode',{}).get('enable',True) and random.random() < 0.5:  # 50%的概率将文本转为fake-chat
+        #         # utils_file.logging_info(
+        #         #     f"task_name: {task_name} in asr_X_set, start to process")
+        #         asr_txt, label_tag = split_txt2asr_tag(txt)
+        #         if asr_txt is None:
+        #             print(f"txt: {txt} 无法匹配到asr_txt和label标签")
+        #             continue
+        #         if task_name == "<TRANSCRIBE> <EMOTION>":
+        #             if not label_tag in emotion_tags:
+        #                 print(f"txt: {txt} 无法匹配到emotion标签")
+        #                 continue
+        #             txt = f"<think>用户说的话是:{asr_txt},年龄为:{unk_tag},性别为:{unk_tag},风格为:{unk_tag},情感为:{label_tag},声音事件为:{unk_tag},推测使用的回复情感为:{unk_tag},我应该综合用户的语义和副语言信息给出专业且对应的回答<think end>{unk_tag}"
+        #         elif task_name == "<TRANSCRIBE> <STYLE>":
+        #             if label_tag in none_tags:
+        #                 print(f"txt: {txt} 无法匹配到style标签")
+        #                 continue
+        #             txt = f"<think>用户说的话是:{asr_txt},年龄为:{unk_tag},性别为:{unk_tag},风格为:{label_tag},情感为:{unk_tag},声音事件为:{unk_tag},推测使用的回复情感为:{unk_tag},我应该综合用户的语义和副语言信息给出专业且对应的回答<think end>{unk_tag}"
+        #         elif task_name == "<TRANSCRIBE> <CAPTION>":
+        #             if label_tag in none_tags:
+        #                 print(f"txt: {txt} 无法匹配到caption标签")
+        #                 continue
+        #             txt = f"<think>用户说的话是:{asr_txt},年龄为:{unk_tag},性别为:{unk_tag},风格为:{unk_tag},情感为:{unk_tag},声音事件为:{label_tag},推测使用的回复情感为:{unk_tag},我应该综合用户的语义和副语言信息给出专业且对应的回答<think end>{unk_tag}"
+        #         elif task_name == "<TRANSCRIBE> <GENDER>":
+        #             if label_tag not in gender_tags:
+        #                 print(f"txt: {txt} 无法匹配到gender标签")
+        #                 continue
+        #             txt = f"<think>用户说的话是:{asr_txt},年龄为:{unk_tag},性别为:{label_tag},风格为:{unk_tag},情感为:{unk_tag},声音事件为:{unk_tag},推测使用的回复情感为:{unk_tag},我应该综合用户的语义和副语言信息给出专业且对应的回答<think end>{unk_tag}"
+        #         elif task_name == "<TRANSCRIBE> <AGE>":
+        #             if label_tag not in age_tags:
+        #                 print(f"txt: {txt} 无法匹配到age标签")
+        #                 continue
+        #             txt = f"<think>用户说的话是:{asr_txt},年龄为:{label_tag},性别为:{unk_tag},风格为:{unk_tag},情感为:{unk_tag},声音事件为:{unk_tag},推测使用的回复情感为:{unk_tag},我应该综合用户的语义和副语言信息给出专业且对应的回答<think end>{unk_tag}"
+        #         else:
+        #             print(f"task_name: {task_name} 无法处理")
+        #             continue
+        #         task_name = "<S2TCHAT_FAKE>"
+        #         sample['task'] = task_name
+        #         sample['txt'] = txt
+
+        # =============================== 对理解任务做处理 结束========================
+
+
+
 
         # =============针对理解任务做only X 的处理, 加入理解任务转换的任务===================================
         if other_tokenze_conf.get("use_50_per_change_if_only_X", False) and task_name in asr_X_set:
@@ -644,7 +690,223 @@ def tokenize(data, tokenizer: HuggingFaceTokenizer, other_tokenze_conf={}, globa
                 txt = extract_answer(sample['txt'])
                 sample['txt'] = txt
                 # utils_file.logging_limit_print(f"old txt: {sample['txt']}, 发生了文本替换, replace to new txt: {txt}")
-        # =============针对理解任务做only X 的处理, 加入理解任务转换的任务 end===================================
+
+        # if task_name in natural_language_set and other_tokenze_conf.get("natural_language_convert", {}).get('enable',
+        #                                                                                                     False):
+        #     rate_num = other_tokenze_conf.get("natural_language_convert", {}).get('rate', 0)
+        #     if random.random() < rate_num:  # 进行文本自然语言指令+自然回答
+        #         label_tag = extract_first_content(sample['txt']).replace("<", "").replace(">", "").lower()
+        #         asr_txt = sample['txt'].replace(extract_first_content(sample['txt']), "")
+        #         if len(asr_txt) >= 1:
+        #             tmp_txt = get_answer_prompt_by_task(task_name, label_tag, asr_txt)
+        #         else:
+        #             tmp_txt = get_answer_prompt_by_task(task_name, label_tag)
+        #         tmp_prompt = get_question_prompt_by_task(task_name)
+        #         if tmp_txt is not None and tmp_prompt is not None:
+        #             txt = tmp_txt
+        #             sample['txt'] = txt
+        #             insert_prompt = tmp_prompt
+        #         else:
+        #             utils_file.logging_error(
+        #                 f"error: get_answer_prompt_by_task or get_question_prompt_by_task return None, {sample}, {task_name}, {label_tag}, {tmp_txt}, {tmp_prompt}")
+        #             pass
+        #     elif random.random() < rate_num:  # 进行语音自然语言wav指令+自然回答
+        #         label_tag = extract_first_content(sample['txt']).replace("<", "").replace(">", "").lower()
+        #         asr_txt = sample['txt'].replace(extract_first_content(sample['txt']), "")
+        #         if len(asr_txt) > 1:
+        #             tmp_txt = get_answer_prompt_by_task(task_name, label_tag, asr_txt)
+        #         else:
+        #             tmp_txt = get_answer_prompt_by_task(task_name, label_tag)
+        #         tmp_wav_path = get_question_wav_path_by_task(task_name)
+        #         if tmp_txt is not None and tmp_wav_path is not None and os.path.exists(tmp_wav_path):
+        #             try:
+        #                 txt = tmp_txt
+        #                 sample['txt'] = txt
+        #                 # 为答案wav拼接指令wav
+        #                 wav_origin = sample['wav']
+        #                 rate_origin = sample['sample_rate']
+        #                 wav_added, rate_added = torchaudio.load(tmp_wav_path)
+        #                 if rate_origin != rate_added:
+        #                     # utils_file.logging_error(f"error: sample_rate not match, {sample}")
+        #                     if rate_origin != 16000:
+        #                         wav_origin = torchaudio.transforms.Resample(orig_freq=rate_origin, new_freq=16000)(
+        #                             wav_origin)
+        #                     if rate_added != 16000:
+        #                         wav_added = torchaudio.transforms.Resample(orig_freq=rate_added, new_freq=16000)(
+        #                             wav_added)
+        #                 if random.random() < 0.5:
+        #                     sample['wav'] = torch.cat([wav_origin, wav_added], dim=1)
+        #                 else:
+        #                     sample['wav'] = torch.cat([wav_added, wav_origin], dim=1)
+        #                 sample['sample_rate'] = 16000
+        #                 task_name = "<S2TCHAT>"
+        #                 sample['task'] = task_name
+        #             except Exception as e:
+        #                 utils_file.logging_error(f"error: cat instruct wav, {e}")
+        #         else:
+        #             utils_file.logging_error(
+        #                 f"{tmp_wav_path}存在与否：{os.path.exists(tmp_wav_path) if tmp_wav_path is not None else 'None'}")
+        #             utils_file.logging_error(
+        #                 f"error: get_answer_prompt_by_task or get_question_wav_path_by_task return None, {sample}")
+        #             pass
+        # if task_name == "<CAPTION> <AUDIO>":
+        #     continue
+        #     task_name = "<CAPTION>"
+        #     sample['task'] = task_name
+        #     random_num = random.random()
+        #     if random_num <= 0.5:  # 进行文本自然语言指令+自然回答
+        #         tmp_prompt = get_question_prompt_by_task(task_name)
+        #         insert_prompt = tmp_prompt
+        #     else:  # random_num > 0.5: # 进行语音自然语言wav指令+自然回答
+        #         tmp_wav_path = get_question_wav_path_by_task(task_name)
+        #         if tmp_wav_path is not None and os.path.exists(tmp_wav_path):
+        #             try:
+        #                 wav_origin = sample['wav']
+        #                 rate_origin = sample['sample_rate']
+        #                 wav_added, rate_added = torchaudio.load(tmp_wav_path)
+        #                 if rate_origin != rate_added:
+        #                     # utils_file.logging_error(f"error: sample_rate not match, {sample}")
+        #                     if rate_origin != 16000:
+        #                         wav_origin = torchaudio.transforms.Resample(orig_freq=rate_origin, new_freq=16000)(
+        #                             wav_origin)
+        #                     if rate_added != 16000:
+        #                         wav_added = torchaudio.transforms.Resample(orig_freq=rate_added, new_freq=16000)(
+        #                             wav_added)
+        #                 if random.random() < 0.5:
+        #                     sample['wav'] = torch.cat([wav_origin, wav_added], dim=1)
+        #                 else:
+        #                     sample['wav'] = torch.cat([wav_added, wav_origin], dim=1)
+        #                 sample['sample_rate'] = 16000
+        #                 task_name = "<S2TCHAT>"
+        #                 sample['task'] = task_name
+        #             except Exception as e:
+        #                 utils_file.logging_error(f"error: cat instruct wav, {e}")
+        #         else:
+        #             utils_file.logging_error(
+        #                 f"{tmp_wav_path}存在与否：{os.path.exists(tmp_wav_path) if tmp_wav_path is not None else 'None'}")
+        #             utils_file.logging_error(
+        #                 f"error: get_answer_prompt_by_task or get_question_wav_path_by_task return None, {sample}")
+        #             pass
+        # =============针对理解任务做only X 的处理结束===================================
+
+        # ======================对s2s任务进行处理，在情感标签上加入<NEUTRAL>标签， 并加入think句子, 并进行history 历史信息的处理==============
+        if task_name == "<S2TCHAT> <TEXT2TOKEN>":
+            emotion_tag, txt = process_tagged_string(txt)
+            sample['txt'] = txt
+
+            # history_items = sample.get('history', [])
+            # if len(history_items) > 0:
+            #     history_num = random.randint(1, min(len(history_items), 3))
+            #     history_items = history_items[:history_num]  # 取前3个历史信息
+            #     for history_item in history_items:
+            #         history_item_txt = history_item.get('txt', "")
+            #         tokens, label = tokenizer.tokenize(
+            #             process_text2(history_item_txt, sample.get("task", "<TRANSCRIBE>")))
+            #         history_item['txt'] = label + [tokenizer.tokenizer.eos_token_id]
+            #     sample['history'] = history_items
+            #     task_name = "<S2TCHAT> <TEXT2TOKEN> <HISTORY>"
+            #     sample['task'] = task_name
+
+            if other_tokenze_conf.get("use_s2s_convert_s2t", {}).get("enable", False) and random.random() < other_tokenze_conf.get("use_s2s_convert_s2t", {}).get("rate", 0.5):  # 先把一半转成s2t任务
+                task_name = "<S2TCHAT>"
+                sample['task'] = task_name
+                sample['extra'] = {}
+                final_extra = {}
+            # elif other_tokenze_conf.get("use_s2s_streaming_random", {}).get("enable", False) and random.random() < other_tokenze_conf.get("use_s2s_streaming_random", {}).get("rate", 0.5):
+            #     # 得到一个50%的随机 for speech2speech
+            #     # 有50%的概率将token输出改为流式输出
+            #     # 对于剩下的一半，随机选择是否转成流失s2s任务
+            #     task_name = "<S2TCHAT> <TEXT2TOKEN> <STREAMING>"
+            #     sample['task'] = task_name
+            else:
+                q_txt = final_extra.get("q_txt", None)
+                if q_txt is not None and other_tokenze_conf.get('use_think_mode', {}).get('enable', True) and random.random() < other_tokenze_conf.get('use_think_mode', {}).get('rate', 0.8):
+                    task_name = "<S2TCHAT> <TEXT2TOKEN> <THINK>"
+                    sample['task'] = task_name
+                    age_tag = final_extra.get("age", None)
+                    gender_tag = final_extra.get("gender", None)
+                    caption_tag = final_extra.get("caption", None)
+                    style_tag = final_extra.get("style", None)
+                    # if age_tag is not None:
+                    #     think_txt = f"<think>用户说的话是:{q_txt},检测到用户年龄为{age_tag},我应该综合用户的年龄给出专业且对应的回答。<think end>"
+                    # elif gender_tag is not None:
+                    #     think_txt = f"<think>用户说的话是:{q_txt},检测到用户性别为{gender_tag},我应该综合用户的性别给出专业且对应的回答。<think end>"
+                    # elif caption_tag is not None:
+                    #     think_txt = f"<think>用户说的话是:{q_txt},检测到输入音频中有如下音频事件:{caption_tag},我应该综合音频事件给出专业且对应的回答。<think end>"
+                    # elif emotion_tag != "<NEUTRAL>":
+                    #     think_txt = f"<think>用户说的话是:{q_txt},检测到用户情绪丰富,经分析我应当采用{emotion_tag}情感来回复用户。<think end>"
+                    # else:
+                    #     think_txt = f"<think>用户说的话是:{q_txt},我应该做出专业且对应的回答。<think end>"
+                    # txt = f'{think_txt}{txt}'
+                    unk_rate = 0.95
+                    if random.random() < unk_rate:
+                        is_unk = True
+                    else:
+                        is_unk = False
+                    q_emotion_tag = final_extra.get("q_emotion", None) # 其实应该是q_emotion，为了适配全标签数据
+                    if  q_emotion_tag is not None:
+                        if not q_emotion_tag.startswith("<") and not q_emotion_tag.endswith(">"):
+                            q_emotion_tag = "<" + q_emotion_tag + ">"
+                    else:
+                        q_emotion_tag =  unk_tag if is_unk else "<NEUTRAL>"
+
+                    if emotion_tag not in answer_emotion_tags or emotion_tag == "<NEUTRAL>":
+                        old_emotion_tag = emotion_tag
+                        emotion_tag = unk_tag if is_unk else "<NEUTRAL>"
+                        if is_unk:
+                            txt = txt.replace(old_emotion_tag, emotion_tag)
+
+
+                    if age_tag is not None:
+                        if not age_tag.startswith("<") and not age_tag.endswith(">"):
+                            age_tag = "<" + age_tag + ">"
+                    else:
+                        age_tag =  unk_tag if is_unk else "<ADULT>"
+                    if gender_tag is not None:
+                        if not gender_tag.startswith("<") and not gender_tag.endswith(">"):
+                            gender_tag = "<" + gender_tag + ">"
+                    else:
+                        gender_tag =  unk_tag if is_unk else "<MALE>"
+                    if caption_tag is not None:
+                        if not caption_tag.startswith("<") and not caption_tag.endswith(">"):
+                            caption_tag = "<" + caption_tag + ">"
+                    else:
+                        caption_tag =  unk_tag if is_unk else "<OTHER>"
+                    if style_tag is not None:
+                        if not style_tag.startswith("<") and not style_tag.endswith(">"):
+                            style_tag = "<" + style_tag + ">"
+                    else:
+                        style_tag =  unk_tag if is_unk else "<日常口语>"
+
+
+
+                    think_txt = f"<think>用户说的话是:{q_txt},年龄为:{age_tag},性别为:{gender_tag},风格为:{style_tag},情感为:{q_emotion_tag},声音事件为:{caption_tag},推测使用的回复情感为:{emotion_tag},我应该综合用户的语义和副语言信息给出专业且对应的回答<think end>"
+
+                    # if age_tag is not None:
+                    #     gender_tag = sample.get("gender", unk_tag)
+                    #     think_txt = f"<think>用户说的话是:{q_txt},年龄为:{age_tag},性别为:{gender_tag},风格为:{'<日常口语>' if not is_unk else unk_tag},情感为:{q_emotion_tag},声音事件为:{'<OTHER>' if not is_unk else unk_tag},推测使用的回复情感为:{'<NEUTRAL>' if not is_unk else unk_tag},我应该综合用户的语义和副语言信息给出专业且对应的回答<think end>"
+                    # elif gender_tag is not None:
+                    #     age_tag = sample.get("age", unk_tag)
+                    #     think_txt = f"<think>用户说的话是:{q_txt},年龄为:{age_tag},性别为:{gender_tag},风格为:{'<日常口语>' if not is_unk else unk_tag},情感为:{q_emotion_tag},声音事件为:{'<OTHER>' if not is_unk else unk_tag},推测使用的回复情感为:{'<NEUTRAL>' if not is_unk else unk_tag},我应该综合用户的语义和副语言信息给出专业且对应的回答<think end>"
+                    # elif caption_tag is not None:
+                    #     think_txt = f"<think>用户说的话是:{q_txt},年龄为:{unk_tag},性别为:{unk_tag},风格为:{'<日常口语>' if not is_unk else unk_tag},情感为:{q_emotion_tag},声音事件为:{caption_tag},推测使用的回复情感为:{'<NEUTRAL>' if not is_unk else unk_tag},我应该综合用户的语义和副语言信息给出专业且对应的回答<think end>"
+                    # elif emotion_tag != "<NEUTRAL>":
+                    #     think_txt = f"<think>用户说的话是:{q_txt},年龄为:{unk_tag},性别为:{unk_tag},风格为:{'<日常口语>' if not is_unk else unk_tag},情感为:{q_emotion_tag},声音事件为:{'<OTHER>' if not is_unk else unk_tag},推测使用的回复情感为:{emotion_tag},我应该综合用户的语义和副语言信息给出专业且对应的回答<think end>"
+                    # elif style_tag is not None:
+                    #     think_txt = f"<think>用户说的话是:{q_txt},年龄为:{unk_tag},性别为:{unk_tag},风格为:{style_tag},情感为:{q_emotion_tag},声音事件为:{'<OTHER>' if not is_unk else unk_tag},推测使用的回复情感为:{'<NEUTRAL>' if not is_unk else unk_tag},我应该综合用户的语义和副语言信息给出专业且对应的回答<think end>"
+                    # else:
+                    #     think_txt = f"<think>用户说的话是:{q_txt},年龄为:{unk_tag},性别为:{unk_tag},风格为:{'<日常口语>' if not is_unk else unk_tag},情感为:{'<NEUTRAL>' if not is_unk else unk_tag},声音事件为:{'<OTHER>' if not is_unk else unk_tag},推测使用的回复情感为:{'<NEUTRAL>' if not is_unk else unk_tag},我应该综合用户的语义和副语言信息给出专业且对应的回答<think end>"
+                    sample['original_txt'] = txt
+                    txt = f'{think_txt}{txt}'
+                    sample['txt'] = txt
+
+
+        if "original_txt" not in sample:
+            sample['original_txt'] = txt
+
+
+
+        # ======================对s2s任务处理结束=======================================
 
 
 
@@ -654,13 +916,6 @@ def tokenize(data, tokenizer: HuggingFaceTokenizer, other_tokenze_conf={}, globa
                 task_name = "<TEXT2TOKEN> <STREAMING>"
                 sample['task'] = task_name
         # =======================对tts任务处理结束=======================================
-
-        # =======================处理s2t think========================================
-        if task_name == "<S2TCHAT> <THINKER>":
-            if 'think_str' in final_extra:
-                think_str = final_extra['think_str']
-                txt = f'<think>{think_str}<think end>{txt}'
-        # =======================处理s2t think end=====================================
 
 
         # =======================得到 txt的数字化token =================================
@@ -685,39 +940,38 @@ def tokenize(data, tokenizer: HuggingFaceTokenizer, other_tokenze_conf={}, globa
                 if insert_prompt is not None:
                     prompt = insert_prompt
                 else:
-                    if task_name not in global_prompt_dict:
-                        prompt = "<no_prompt>"
+                    if task_name in ['<S2TCHAT> <TEXT2TOKEN> <THINK>', '<S2TCHAT> <TEXT2TOKEN> <HISTORY>', '<S2TCHAT> <TEXT2TOKEN> <EMOTION>']:
+                        tmp_task_name = "<S2TCHAT> <TEXT2TOKEN>"
+                    elif task_name == "<S2TCHAT_FAKE>":
+                        tmp_task_name = "<S2TCHAT>"
                     else:
-                        random_index = random.randint(0, len(global_prompt_dict[task_name]) - 1)
-                        prompt = global_prompt_dict[task_name][random_index]
+                        tmp_task_name = task_name
+                    random_index = random.randint(0, len(global_prompt_dict[tmp_task_name]) - 1)
+                    prompt = global_prompt_dict[tmp_task_name][random_index]
             if prompt == "<no_prompt>":
                 # utils_file.logging_limit_print(f'no prompt for {task_name}')
                 sample['prompt'] = []
             else:
                 sample['prompt'] = tokenizer.tokenize(prompt)[1]  # labels
         except Exception as e:
-            utils_file.logging_info(f"error in extract prompt, {e},task_name: {task_name}, sample: {sample}")
+            utils_file.logging_info(f"error in extract prompt, {e}, prompt: {prompt}, task_name: {task_name}, sample: {sample}")
             continue
         # ====================处理prompt 结束 =======================================
 
 
 
         # ========================处理speech token ================================
-        if task_name == "<S2TCHAT> <TEXT2TOKEN>" or task_name == "<S2TCHAT> <TEXT2TOKEN> <THINK>" or task_name == "<TEXT2TOKEN>" or task_name == "<TEXT2TOKEN> <STREAMING>":
-            if "speech_token" in final_extra:
-                speech_token_tmp = final_extra['speech_token']
-                if not isinstance(speech_token_tmp, list):
-                    speech_token_tmp = []
-                    print(f"error: speech_token is not a list, {speech_token_tmp}")
-                    continue
-                speech_token = [int(x) for x in speech_token_tmp]
-                if len(speech_token) == 0:
-                    utils_file.logging_warning(f"error: speech_token is empty,task: {task_name}")
-                    continue
-                sample['speech_token'] = [speech_token_num - 1] + speech_token + [speech_token_num - 1]
-            else:
+        if "speech_token" in final_extra and task_name != "<S2TCHAT>":
+            speech_token_tmp =final_extra['speech_token']
+            if not isinstance(speech_token_tmp, list):
+                speech_token_tmp = []
+                print(f"error: speech_token is not a list, {speech_token_tmp}")
+                continue
+            speech_token = [int(x) for x in speech_token_tmp]
+            if len(speech_token) == 0:
                 utils_file.logging_warning(f"error: speech_token is empty,task: {task_name}")
                 continue
+            sample['speech_token'] = [speech_token_num - 1] + speech_token + [speech_token_num - 1]
         else:
             sample['speech_token'] = []
         # ========================处理speech token 结束 ==========================
@@ -725,29 +979,40 @@ def tokenize(data, tokenizer: HuggingFaceTokenizer, other_tokenze_conf={}, globa
 
 
         # =====================处理output_type======================
-        # tts
-        if task_name == "<TEXT2TOKEN>":
-            sample['output_type'] = "text2token"
-        elif task_name == "<TEXT2TOKEN> <STREAMING>":
-            sample['output_type'] = "text2token_streaming"
-        elif task_name == "<S2TCHAT> <TEXT2TOKEN>" or task_name == "<S2TCHAT> <TEXT2TOKEN> <EMOTION>":
-            sample['output_type'] = 'speech2text_token'
-        elif task_name == "<S2TCHAT> <TEXT2TOKEN> <STREAMING>":
-            sample['output_type'] = 'speech2text_token_streaming'
-        elif task_name == "<S2TCHAT> <TEXT2TOKEN> <THINK>":
-            sample['output_type'] = 'speech2text_token_think'
-        elif task_name == "<S2TCHAT> <TEXT2TOKEN> <HISTORY>":
-            sample['output_type'] = 'speech2text_token_history'
-        elif task_name == "<TEXT2TEXT>":
-            sample['output_type'] = 'text2text'
-        elif task_name == "<S2TCHAT>":
-            sample['output_type'] ='s2t_chat'
-        elif task_name == "<S2TCHAT_FAKE>":
-            sample['output_type'] ='s2t_chat_fake'
-        elif task_name == "<S2TCHAT> <THINKER>":
-            sample['output_type'] ='s2t_chat_think'
+        if "speech_token" in final_extra:
+            # tts
+            if task_name == "<TEXT2TOKEN>":
+                sample['output_type'] = "text2token"
+            elif task_name == "<TEXT2TOKEN> <STREAMING>":
+                sample['output_type'] = "text2token_streaming"
+            # tts end
+            # s2s
+            elif task_name == "<S2TCHAT> <TEXT2TOKEN>" or task_name == "<S2TCHAT> <TEXT2TOKEN> <EMOTION>":
+                sample['output_type'] = 'speech2text_token'
+            elif task_name == "<S2TCHAT> <TEXT2TOKEN> <STREAMING>":
+                sample['output_type'] = 'speech2text_token_streaming'
+            elif task_name == "<S2TCHAT> <TEXT2TOKEN> <THINK>":
+                sample['output_type'] = 'speech2text_token_think'
+            elif task_name == "<S2TCHAT> <TEXT2TOKEN> <HISTORY>":
+                sample['output_type'] = 'speech2text_token_history'
+            # s2s end
+            # s2s end
+            else:
+                print(f"error: output_type not in ['speech2text_token','speech2text_token_streaming','speech2text_token_think','speech2text_token_history', 'text2text','s2t_chat', 'text'], continue")
+                continue
         else:
-           sample['output_type'] = 'text'
+            if task_name in ["<TEXT2TOKEN>",'<S2TCHAT> <TEXT2TOKEN>', '<S2TCHAT> <TEXT2TOKEN> <THINK>', '<S2TCHAT> <TEXT2TOKEN> <HISTORY>', '<S2TCHAT> <TEXT2TOKEN> <EMOTION>', '<S2TCHAT> <TEXT2TOKEN> <STREAMING>']:
+                print('没有token但是是s2s任务，continue')
+                continue
+            # s2t
+            if task_name == "<TEXT2TEXT>":
+                sample['output_type'] = 'text2text'
+            elif task_name == "<S2TCHAT>":
+                sample['output_type'] ='s2t_chat'
+            elif task_name == "<S2TCHAT_FAKE>":
+                sample['output_type'] ='s2t_chat_fake'
+            else:
+               sample['output_type'] = 'text'
         utils_file.logging_limit_print(f"output_type: {sample['output_type']}")
             # s2t end
         # =====================处理output_type 结束======================
@@ -800,7 +1065,7 @@ def filter(data,
                     f"only_s2s, output_type is not speech2text_token or speech2text_token_streaming,speech2text_token_think,speech2text_token_history, continue, output_type: {output_type}")
                 continue
         if other_filter_conf.get("only_s2t", False):
-            if output_type not in ["text", 's2t_chat', "s2t_chat_fake", "s2t_chat_think"]:
+            if output_type not in ["text", 's2t_chat', "s2t_chat_fake"]:
                 utils_file.logging_error(
                     f"only_s2t, output_type is not s2t, continue, output_type: {output_type}")
                 continue
@@ -1422,12 +1687,6 @@ def dynamic_batch(data, max_frames_in_batch=12000, max_seq_in_batch=10000000):
     longest_seq_s2t_chat_fake = 0
     max_frames_in_batch_s2t_chat_fake = int(max_frames_in_batch)  # 没有prompt的放在一起
 
-    # s2t_chat_think
-    buf_s2t_chat_think = []
-    longest_frames_s2t_chat_think = 0
-    longest_seq_s2t_chat_think = 0
-    max_frames_in_batch_s2t_chat_think = int(max_frames_in_batch)  # 没有prompt的放在一起
-
     batch_nums = 0
     # % 4 ->s2t, t2t, t2s, s2s
     for sample in data:
@@ -1458,6 +1717,34 @@ def dynamic_batch(data, max_frames_in_batch=12000, max_seq_in_batch=10000000):
             frames_after_padding_token_s2s = longest_frames_token_s2s * (len(buf_speech_token_s2s) + 1)
             seq_after_padding_token_s2s = longest_seq_token_s2s * (len(buf_speech_token_s2s) + 1)
             if frames_after_padding_token_s2s > max_frames_in_batch_token_s2s or seq_after_padding_token_s2s > max_seq_in_batch * 0.8:
+                # 虚空制造历史信息
+                # history_batch = []
+                # for sample_i in buf_speech_token_s2s:
+                #     history_list_i = sample_i.get('history', [])
+                #     history_batch.append(history_list_i)
+                # batch_num = len(buf_speech_token_s2s)
+                # 得到一个不大于1的浮点随机数，用于确定是否虚空制造历史信息
+                # rand_num = random.random()
+                # if rand_num < 0 and batch_num >= 4 and all(len(item) == 0 for item in history_batch):
+                #     utils_file.logging_info(f'开始制作虚空历史信息 start make fake history , no streaming')
+                #     # 如果batch_num 的数量大于等于2， 就选择batch内前一半的样本（向下取整）给最后一个样本做历史信息
+                #     history_batch_list = buf_speech_token_s2s[:1]
+                #     # position_id = int(batch_num // 2 * 1.5) if int(batch_num // 2 * 1.5) < batch_num - 1 else batch_num - 1
+                #     position_id = -1
+                #     new_buf_speech_s2s = buf_speech_token_s2s[position_id:]
+                #     history_list = []
+                #     for sample_i in history_batch_list:
+                #         feat_wav_i = sample_i['feat']
+                #         txt_i = sample_i['label']
+                #         history_list.append({'wav': feat_wav_i, 'txt': txt_i})
+                #     # new_buf_speech_token_with_text_streaming[-1]['history'] = history_list
+                #     for i in range(len(new_buf_speech_s2s)):
+                #         new_buf_speech_s2s[i]['history'] = history_list
+                #     yield new_buf_speech_s2s
+                #     buf_speech_token_s2s = [sample]
+                #     longest_frames_token_s2s = new_sample_frames
+                #     longest_seq_token_s2s = new_seq
+                # else:
                 yield buf_speech_token_s2s
                 buf_speech_token_s2s = [sample]
                 longest_frames_token_s2s = new_sample_frames
@@ -1474,6 +1761,34 @@ def dynamic_batch(data, max_frames_in_batch=12000, max_seq_in_batch=10000000):
             frames_after_padding_token = longest_frames_s2s_streaming * (len(buf_s2s_streaming) + 1)
             seq_after_padding_token = longest_seq_s2s_streaming * (len(buf_s2s_streaming) + 1)
             if frames_after_padding_token > max_frames_in_batch_s2s_streaming or seq_after_padding_token > max_seq_in_batch * 0.6:
+                # 虚空制造历史信息
+                # history_batch = []
+                # for sample_i in buf_speech_token:
+                #     history_list_i = sample_i.get('history', [])
+                #     history_batch.append(history_list_i)
+                # batch_num = len(buf_speech_token)
+                # # 得到一个不大于1的浮点随机数，用于确定是否虚空制造历史信息
+                # rand_num = random.random()
+                # if rand_num< 0 and batch_num >= 4 and all(len(item) == 0 for item in history_batch):
+                #     utils_file.logging_info(f'开始制作虚空历史信息 start make fake history， streaming')
+                #     # 如果batch_num 的数量大于等于2， 就选择batch内前一半的样本（向下取整）给最后一个样本做历史信息
+                #     history_batch_list = buf_speech_token[:1]
+                #     # position_id = int(batch_num // 2 *1.5) if int(batch_num // 2 *1.5)<batch_num-1 else batch_num-1
+                #     position_id = -1
+                #     new_buf_speech_token = buf_speech_token[position_id:]
+                #     history_list = []
+                #     for sample_i in history_batch_list:
+                #         feat_wav_i = sample_i['feat']
+                #         txt_i = sample_i['label']
+                #         history_list.append({'wav': feat_wav_i, 'txt': txt_i})
+                #     # new_buf_speech_token[-1]['history'] = history_list
+                #     for i in range(len(new_buf_speech_token)):
+                #         new_buf_speech_token[i]['history'] = history_list
+                #     yield new_buf_speech_token
+                #     buf_speech_token = [sample]
+                #     longest_frames_token = new_sample_frames
+                #     longest_seq_token = new_seq
+                # else:
                 yield buf_s2s_streaming
                 buf_s2s_streaming = [sample]
                 longest_frames_s2s_streaming = new_sample_frames
@@ -1592,20 +1907,6 @@ def dynamic_batch(data, max_frames_in_batch=12000, max_seq_in_batch=10000000):
                 longest_seq_s2t_chat_fake = new_seq
             else:
                 buf_s2t_chat_fake.append(sample)
-        elif "output_type" in sample and sample["output_type"] == "s2t_chat_think":
-            new_seq = sample['feat'].size(0) / 8 + len(sample['label']) + len(sample.get('prompt', []))
-            new_seq = new_seq + 29 *2  + history_len
-            longest_seq_s2t_chat_think = max(longest_seq_s2t_chat_think, new_seq)
-            longest_frames_s2t_chat_think = max(longest_frames_s2t_chat_think, new_sample_frames)
-            frames_after_padding_s2t_chat_think = longest_frames_s2t_chat_think * (len(buf_s2t_chat_think) + 1)
-            seq_after_padding_s2t_chat_think = longest_seq_s2t_chat_think * (len(buf_s2t_chat_think) + 1)
-            if frames_after_padding_s2t_chat_think > max_frames_in_batch_s2t_chat_think or seq_after_padding_s2t_chat_think > max_seq_in_batch:
-                yield buf_s2t_chat_think
-                buf_s2t_chat_think = [sample]
-                longest_frames_s2t_chat_think = new_sample_frames
-                longest_seq_s2t_chat_think = new_seq
-            else:
-                buf_s2t_chat_think.append(sample)
         else:
             if len(sample.get('prompt', [])) == 0:
                 # 没有prompt的text任务的放在一起

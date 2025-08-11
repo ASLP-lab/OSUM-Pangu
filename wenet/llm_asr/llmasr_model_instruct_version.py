@@ -307,6 +307,7 @@ class LLMASR_Model(nn.Module):
         qwen_instruct_prompt_pattern_1_tts = "<|im_start|>system\nYou are OSUM-chat, a speech synthesis assistant by ASLP Lab. You generate natural and fluent speech from text input.<|im_end|>\n"
         qwen_instruct_prompt_pattern_1_tts_streaming = "<|im_start|>system\nYou are OSUM-chat, a speech synthesis assistant by ASLP Lab. You generate natural speech from text input and output both audio and the original text in interleaved format.<|im_end|>\n"
         qwen_instruct_prompt_pattern_1_old = "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n"
+        qwen_instruct_prompt_pattern_1_s2t_thinking = "<|im_start|>system\nYou are OSUM-chat, a thinking-enabled speech-to-text dialogue assistant by ASLP Lab. You not only comprehend the semantic meaning and paralinguistic cues in speech but also engage in deliberate reasoning to process such information. Based on this thinking process, you then respond exclusively with appropriate text.<|im_end|>\n"
         # user_start = "<|im_start|>user\n"
         # 赋予不同的系统提示。
         if output_type == "s2t_chat":
@@ -327,6 +328,8 @@ class LLMASR_Model(nn.Module):
             system_prompt = qwen_instruct_prompt_pattern_1_tts_streaming
         elif output_type == "text2text":
             system_prompt = qwen_instruct_prompt_pattern__chat_t2t
+        elif output_type == "s2t_chat_think":
+            system_prompt = qwen_instruct_prompt_pattern_1_s2t_thinking
         else:
             system_prompt = qwen_instruct_prompt_pattern_1_old
         # if output_type == "speech2text_token_history":
@@ -346,7 +349,7 @@ class LLMASR_Model(nn.Module):
         #     output_type = "text"
         # assert output_type in ['text', 'speech2text_token', 'text2token'], f"output_type:{output_type} not support"
         # speech inputs
-        if output_type == 'text' or output_type == 's2t_chat' or output_type == 's2t_chat_fake' or output_type == 'speech2text_token' or output_type == "speech2text_token_streaming" or output_type == "speech2text_token_think" or output_type == "speech2text_token_history":
+        if output_type == 'text' or output_type == 's2t_chat' or output_type == 's2t_chat_fake' or output_type== "s2t_chat_think" or output_type == 'speech2text_token' or output_type == "speech2text_token_streaming" or output_type == "speech2text_token_think" or output_type == "speech2text_token_history":
             wavs = batch['feats'].to(device)
             # utils_file.logging_limit_print(f'xxx wav shape {wavs.shape}')
             wavs_len = batch['feats_lengths'].to(device)
@@ -587,7 +590,7 @@ class LLMASR_Model(nn.Module):
             inputs_embeds_list.extend([ speech_embeds, prompt_pattern2_embeds, speech_token_labels_embeds])
             attention_mask_list.extend([speech_masks, prompt_pattern2_mask, speech_token_labels_mask])
             target_list.extend([speech_target, prompt_pattern2_target, speech_token_labels_target])
-        elif output_type == "text" or output_type == 's2t_chat' or output_type == "s2t_chat_fake":
+        elif output_type == "text" or output_type == 's2t_chat' or output_type == "s2t_chat_fake" or output_type == "s2t_chat_think":
             labels = batch['target'].to(device)
             labels_lengths = batch['target_lengths'].to(device)
             labels_embeds, labels_target, labels_mask = self.get_label_embedding(labels, labels_lengths)
@@ -595,7 +598,7 @@ class LLMASR_Model(nn.Module):
                 inputs_embeds_list.append(prompt_embeds)
                 attention_mask_list.append(prompt_mask)
                 target_list.append(prompt_target)
-            elif output_type != 's2t_chat' or output_type != "s2t_chat_fake":
+            elif output_type != 's2t_chat' or output_type != "s2t_chat_fake" or output_type != "s2t_chat_think":
                 utils_file.logging_limit_print(
                     f'prompt is None,task: {batch["task"]}, prompt_embeds:{prompt_embeds}, prompt_mask:{prompt_mask}')
             inputs_embeds_list.extend([ speech_embeds, prompt_pattern2_embeds, labels_embeds])
@@ -632,7 +635,7 @@ class LLMASR_Model(nn.Module):
         position_ids.masked_fill_(attention_mask == 0, 1)
         # utils_file.logging_limit_print(f'xxx final position_ids shape {position_ids.shape}')
         # utils_file.logging_limit_print(f'xxx final position_ids 0 {position_ids[0]}')
-        if output_type == 'text' or output_type == 's2t_chat' or output_type == "s2t_chat_fake" or output_type == "text2text":
+        if output_type == 'text' or output_type == 's2t_chat' or output_type == "s2t_chat_fake" or output_type == "s2t_chat_think" or output_type == "text2text":
             outputs = self.llama_model(
                 inputs_embeds=inputs_embeds,
                 labels=target,
