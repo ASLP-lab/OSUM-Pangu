@@ -703,6 +703,7 @@ def tokenize(data, tokenizer: HuggingFaceTokenizer, other_tokenze_conf={}, globa
             if 'think_str' in final_extra:
                 think_str = final_extra['think_str']
                 txt = f'<think>{think_str}<think end>{txt}'
+                utils_file.logging_limit_print(f"thinking txt: {txt}")
             else:
                 utils_file.logging_error(f"error: think_str is not in extra, {sample}")
                 continue
