@@ -872,7 +872,7 @@ def filter(data,
         # 过滤不当文字wav比例
         if "speech_token" in sample and sample["output_type"] not in ['text','text2text', 's2t_chat', 's2t_chat_fake', 's2t_chat_think']:
             if len(sample['label']) * 0.8 >= len(sample['speech_token']):
-                utils_file.logging_error(f"label 长度过长,和token长度不匹配，continue, len(sample['label']):{len(sample['label'])}, len(sample['speech_token']):{len(sample['speech_token'])},  task: {sample['task']}")
+                utils_file.logging_error(f"label 长度过长,和token长度不匹配，continue, len(sample['label']):{len(sample['label'])}, len(sample['speech_token']):{len(sample['speech_token'])},  task: {sample['task']}, output_type: {sample['output_type']}")
                 continue
             # if len(sample['label'])>=5 and len(sample['speech_token']) > 125 and len(sample['label']) * 8.33 < len(sample['speech_token']): # 5s以上的音频，label长度大于5，限制用每秒至少3个文字
             #     utils_file.logging_error(f"label 长度过短,和token长度不匹配，continue, len(sample['label']):{len(sample['label'])}, len(sample['speech_token']):{len(sample['speech_token'])},len(sample['label']) * 8.33 < len(sample['speech_token'])")

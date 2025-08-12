@@ -131,7 +131,11 @@ def url_opener(data):
         if combine_path == "-":
             big_dict = None
         else:
-            dict_list = load_dict_list_from_jsonl(combine_path)
+            try:
+                dict_list = load_dict_list_from_jsonl(combine_path)
+            except Exception as e:
+                utils_file.logging_error(f'OSUM-EChat url_opener 错误，加载combine_path {combine_path} 失败 {e}')
+                dict_list = []
             big_dict = {}
             for item in dict_list:
                 big_dict[item['key']] = item
@@ -866,7 +870,7 @@ def filter(data,
                 continue
 
         # 过滤不当文字wav比例
-        if "speech_token" in sample and sample["output_type"] not in ['text','text2text', 's2t_chat', 's2t_chat_fake']:
+        if "speech_token" in sample and sample["output_type"] not in ['text','text2text', 's2t_chat', 's2t_chat_fake', 's2t_chat_think']:
             if len(sample['label']) * 0.8 >= len(sample['speech_token']):
                 utils_file.logging_error(f"label 长度过长,和token长度不匹配，continue, len(sample['label']):{len(sample['label'])}, len(sample['speech_token']):{len(sample['speech_token'])},  task: {sample['task']}")
                 continue
