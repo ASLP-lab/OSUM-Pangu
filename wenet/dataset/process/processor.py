@@ -32,7 +32,8 @@ import torch.nn.functional as F
 from gxl_ai_utils.utils import utils_file
 from torch.nn.utils.rnn import pad_sequence
 from wenet.text.base_tokenizer import BaseTokenizer
-from wenet.llm_asr.wav_instrcut_tools import get_question_prompt_by_task, get_answer_prompt_by_task, get_question_wav_path_by_task
+from wenet.llm_asr.wav_instrcut_tools import get_question_prompt_by_task, get_answer_prompt_by_task, \
+    get_question_wav_path_by_task
 from wenet.text.hugging_face_tokenizer import HuggingFaceTokenizer
 
 # torchaudio.utils.sox_utils.set_buffer_size(16500)
@@ -53,6 +54,7 @@ def process_text(text):
     text = re.sub(r'\s*>\s*', '>', text)
     return text
 
+
 def process_text2(text, task_tag):
     # 1. 删除汉字左右两侧的空格
     text = re.sub(r'\s*([\u4e00-\u9fff])\s*', r'\1', text)
@@ -64,7 +66,8 @@ def process_text2(text, task_tag):
     text = re.sub(r'\s*>\s*', '>', text)
     return text
 
-def insert_at_position(lst, item_str, position, is_wav:bool):
+
+def insert_at_position(lst, item_str, position, is_wav: bool):
     """
     将 item_str 插入到 lst 的第 position 个位置（1-based），
     若 lst 长度不足则以 "-1" 填充至目标长度后再插入。
@@ -83,6 +86,7 @@ def insert_at_position(lst, item_str, position, is_wav:bool):
         lst[index] = item_str
     return lst
 
+
 def check_wav_format(s):
     match = re.fullmatch(r"wav_(\d+)", s)
     if match:
@@ -90,12 +94,14 @@ def check_wav_format(s):
     else:
         return False, -1
 
+
 def check_txt_format(s):
     match = re.fullmatch(r"txt_(\d+)", s)
     if match:
         return True, int(match.group(1))
     else:
         return False, -1
+
 
 def load_dict_list_from_jsonl(jsonl_file_path) -> list:
     """"""
@@ -110,6 +116,8 @@ def load_dict_list_from_jsonl(jsonl_file_path) -> list:
                 print(e)
                 continue
     return lines_res
+
+
 def url_opener(data):
     """ Give url or local file, return file descriptor
         Inplace operation.
@@ -150,7 +158,7 @@ def url_opener(data):
                 process = Popen(cmd, shell=True, stdout=PIPE)
                 sample.update(process=process)
                 stream = process.stdout
-            sample.update(stream=stream,big_dict=big_dict)
+            sample.update(stream=stream, big_dict=big_dict)
             yield sample
         except Exception as ex:
             logging.warning('Failed to open {}'.format(shard_path))
@@ -341,6 +349,7 @@ def tar_file_and_group_full_data(data, total_num=0):
                 sample['process'].communicate()
             sample['stream'].close()
 
+
 # for history
 # elif check_wav_format(postfix)[0]:
 # position = check_wav_format(postfix)[1]
@@ -525,12 +534,13 @@ def split_txt2asr_tag(text):
 self_list = [
     # 原有 LLM 名称及变体
     "MOSS", "MOSS Assistant", "MOSS助手",
-    "QWEN", "QWEN Assistant", "QWEN助手","小智机器人", "小智助手", "小智AI助手","Qwen助手"
+    "QWEN", "QWEN Assistant", "QWEN助手", "小智机器人", "小智助手", "小智AI助手", "Qwen助手"
 
     # 通用英文助手/AI 名称
-    "VirtualAssistant", "virtual assistant",
-    "Helper", "helper", "ChatBot","chat bot", "chatbot", "Chat Bot",
-    "AI Agent", "AI agent",  "ChatGPT", "chatgpt","<think>"
+                                                                                  "VirtualAssistant",
+    "virtual assistant",
+    "Helper", "helper", "ChatBot", "chat bot", "chatbot", "Chat Bot",
+    "AI Agent", "AI agent", "ChatGPT", "chatgpt", "<think>"
 
     # 常见英文名字
     # " Alice ", " alice ", " Bob ", " bob ", " Charlie ", " charlie ",
@@ -542,19 +552,19 @@ self_list = [
     # "小李", "小王", "小赵", "小周", "小吴", "小马", "小暖", "乐哥","李娜"
 
     # 中文名字 + 助手/AI 后缀
-    "小明助手", "小红小助手", "小刚AI", "晓明助手", "阿强Bot",
+                                                  "小明助手", "小红小助手", "小刚AI", "晓明助手", "阿强Bot",
     "阿丽小助手", "王磊AI助手", "李娜AI", "张伟助手", "赵敏Bot",
     "刘洋AI小助手", "陈晨智能助手", "<think>"
 
     # 混合中英文风格
-    "MOSS小助手", "QWEN小助手", "小智Bot", "Assistant小智", "AI小智",
-    "ChatBot小明", "VirtualAssistant李娜","大型语言模型","语言模型"
+                                    "MOSS小助手", "QWEN小助手", "小智Bot", "Assistant小智", "AI小智",
+    "ChatBot小明", "VirtualAssistant李娜", "大型语言模型", "语言模型"
 
 ]
 escaped = [re.escape(w) for w in self_list if w]
 pattern = re.compile(r"(" + "|".join(escaped) + r")")
 
-pass_key_set =set(utils_file.load_list_file_clean("/home/A02_tmpdata3/ckpt/all_delete.txt"))
+pass_key_set = set(utils_file.load_list_file_clean("/home/A02_tmpdata3/ckpt/all_delete.txt"))
 
 text = "MOSS小助手，你好！"
 matches = pattern.findall(text)
@@ -570,6 +580,7 @@ if matches:
 else:
     print("都没出现。")
 
+
 def if_have_other_name(text):
     matches = pattern.findall(text)
     if matches:
@@ -580,7 +591,11 @@ def if_have_other_name(text):
 
 
 emotion_tags = {"<HAPPY>", "<SAD>", "<ANGRY>", "<ANGER>", "<FEAR>", "<DISGUST>", "<SURPRISE>", "<NEUTRAL>"}
-answer_emotion_tags = {"<ANGER>","<FEAR>","<HAPPY>","<SURPRISE>","<SAD>","<DISGUST>","<CONFUSED>","<SARCASM>","<EMBARRASSED>","<CURIOUS>","<WORRIED>","<SHY>","<SORRY>","<NEUTRAL>",}
+answer_emotion_tags = {"<ANGER>", "<FEAR>", "<HAPPY>", "<SURPRISE>", "<SAD>", "<DISGUST>", "<CONFUSED>", "<SARCASM>",
+                       "<EMBARRASSED>", "<CURIOUS>", "<WORRIED>", "<SHY>", "<SORRY>", "<NEUTRAL>", }
+new_answer_emotion_tags = {
+"愉悦" ,"抱歉", "开心" ,"愤怒" , "惊讶" ,"厌恶" ,"悲伤", "害怕", "哭腔" ,"安慰鼓励" ,"中立"
+}
 age_tags = {"<CHILD>", "<ADULT>", "<OLD>"}
 gender_tags = {"<MALE>", "<FEMALE>"}
 none_tags = {"<NONE>", "<NULL>", "<None>", "<none>", "<null>"}
@@ -634,8 +649,6 @@ def tokenize(data, tokenizer: HuggingFaceTokenizer, other_tokenze_conf={}, globa
         txt = sample['txt']
         # ============handle task txt end =======================================
 
-
-
         # ===============做补丁处理 ==========================================
         if if_have_other_name(txt):
             print(f"txt: {txt} 存在其他名称，跳过")
@@ -684,8 +697,6 @@ def tokenize(data, tokenizer: HuggingFaceTokenizer, other_tokenze_conf={}, globa
                 # utils_file.logging_limit_print(f"old txt: {sample['txt']}, 发生了文本替换, replace to new txt: {txt}")
         # =============针对理解任务做only X 的处理, 加入理解任务转换的任务 end===================================
 
-
-
         # =======================对tts任务做处理=======================================
         if task_name == "<TEXT2TOKEN>" and other_tokenze_conf.get("use_streaming_tts", {}).get("enable", False):
             if random.random() < other_tokenze_conf.get("use_streaming_tts", {}).get("rate", 0.5):
@@ -693,29 +704,103 @@ def tokenize(data, tokenizer: HuggingFaceTokenizer, other_tokenze_conf={}, globa
                 sample['task'] = task_name
         # =======================对tts任务处理结束=======================================
 
-
-        emotion_tag, txt = process_tagged_string(txt) # 如果开头没<中立>，则加上<中立>
         # =======================处理s2t think========================================
         if task_name == "<S2TCHAT> <THINKER>":
-            if 'think_str' in final_extra:
-                think_str = final_extra['think_str']
-                txt = f'<think>{think_str}<think end>{txt}'
+            emotion_tag, txt = process_tagged_string(txt)  # 如果开头没<中立>，则加上<中立>
+            q_txt = final_extra.get("q_txt", None)
+            if q_txt is None:
+                q_txt = final_extra.get("question", None)
+                if q_txt is None:
+                    utils_file.logging_error(f"error: question or q_txt is not in extra, {sample}")
+                    continue
+            age_tag = final_extra.get("age", None)
+            gender_tag = final_extra.get("gender", None)
+            caption_tag = final_extra.get("caption", None)
+            q_emotion_tag = final_extra.get("q_emotion", None)
+            unk_rate = 0.95
+            if random.random() < unk_rate:
+                is_unk = True
             else:
-                utils_file.logging_error(f"error: think_str is not in extra, {sample}")
-                continue
+                is_unk = False
+            if q_emotion_tag is not None:
+                if not q_emotion_tag.startswith("<") and not q_emotion_tag.endswith(">"):
+                    q_emotion_tag = "<" + q_emotion_tag + ">"
+            else:
+                q_emotion_tag = unk_tag if is_unk else "<NEUTRAL>"
+
+            if emotion_tag not in new_answer_emotion_tags or emotion_tag == "<中立>":
+                old_emotion_tag = emotion_tag
+                emotion_tag = unk_tag if is_unk else "<中立>"
+                if is_unk:
+                    txt = txt.replace(old_emotion_tag, emotion_tag)
+
+            if age_tag is not None:
+                if not age_tag.startswith("<") and not age_tag.endswith(">"):
+                    age_tag = "<" + age_tag + ">"
+            else:
+                age_tag = unk_tag if is_unk else "<ADULT>"
+            if gender_tag is not None:
+                if not gender_tag.startswith("<") and not gender_tag.endswith(">"):
+                    gender_tag = "<" + gender_tag + ">"
+            else:
+                gender_tag = unk_tag if is_unk else "<MALE>"
+            if caption_tag is not None:
+                if not caption_tag.startswith("<") and not caption_tag.endswith(">"):
+                    caption_tag = "<" + caption_tag + ">"
+            else:
+                caption_tag = unk_tag if is_unk else "<OTHER>"
+            think_txt = f"<think>用户说的话是:{q_txt},年龄为:{age_tag},性别为:{gender_tag},情感为:{q_emotion_tag},声音事件为:{caption_tag},推测使用的回复情感为:{emotion_tag},我应该综合用户的语义和副语言信息给出专业且对应的回答<think end>"
+            txt = f"{think_txt}{txt}"
         # =======================处理s2t think end=====================================
 
         # ===================处理s2s think============================================
         if task_name == "<S2TCHAT> <TEXT2TOKEN> <THINK>":
-            if 'think_str' in final_extra:
-                think_str = final_extra['think_str']
-                txt = f'<think>{think_str}<think end>{txt}'
-                utils_file.logging_limit_print(f"thinking txt: {txt}")
+            emotion_tag, txt = process_tagged_string(txt)  # 如果开头没<中立>，则加上<中立>
+            q_txt = final_extra.get("q_txt", None)
+            if q_txt is None:
+                q_txt = final_extra.get("question", None)
+                if q_txt is None:
+                    utils_file.logging_error(f"error: question or q_txt is not in extra, {sample}")
+                    continue
+            age_tag = final_extra.get("age", None)
+            gender_tag = final_extra.get("gender", None)
+            caption_tag = final_extra.get("caption", None)
+            q_emotion_tag = final_extra.get("q_emotion", None)
+            unk_rate = 0.95
+            if random.random() < unk_rate:
+                is_unk = True
             else:
-                utils_file.logging_error(f"error: think_str is not in extra, {sample}")
-                continue
-        # ====================处理s2s think end============================================
+                is_unk = False
+            if q_emotion_tag is not None:
+                if not q_emotion_tag.startswith("<") and not q_emotion_tag.endswith(">"):
+                    q_emotion_tag = "<" + q_emotion_tag + ">"
+            else:
+                q_emotion_tag = unk_tag if is_unk else "<NEUTRAL>"
 
+            if emotion_tag not in answer_emotion_tags or emotion_tag == "<NEUTRAL>":
+                old_emotion_tag = emotion_tag
+                emotion_tag = unk_tag if is_unk else "<NEUTRAL>"
+                if is_unk:
+                    txt = txt.replace(old_emotion_tag, emotion_tag)
+
+            if age_tag is not None:
+                if not age_tag.startswith("<") and not age_tag.endswith(">"):
+                    age_tag = "<" + age_tag + ">"
+            else:
+                age_tag = unk_tag if is_unk else "<ADULT>"
+            if gender_tag is not None:
+                if not gender_tag.startswith("<") and not gender_tag.endswith(">"):
+                    gender_tag = "<" + gender_tag + ">"
+            else:
+                gender_tag = unk_tag if is_unk else "<MALE>"
+            if caption_tag is not None:
+                if not caption_tag.startswith("<") and not caption_tag.endswith(">"):
+                    caption_tag = "<" + caption_tag + ">"
+            else:
+                caption_tag = unk_tag if is_unk else "<OTHER>"
+            think_txt = f"<think>用户说的话是:{q_txt},年龄为:{age_tag},性别为:{gender_tag},情感为:{q_emotion_tag},声音事件为:{caption_tag},推测使用的回复情感为:{emotion_tag},我应该综合用户的语义和副语言信息给出专业且对应的回答<think end>"
+            txt = f"{think_txt}{txt}"
+        # ====================处理s2s think end============================================
 
         # =======================得到 txt的数字化token =================================
         tokens, label = tokenizer.tokenize(process_text2(txt, sample.get("task", "<TRANSCRIBE>")))
@@ -726,10 +811,9 @@ def tokenize(data, tokenizer: HuggingFaceTokenizer, other_tokenze_conf={}, globa
             sample['label'] = label + [tokenizer.tokenizer.eos_token_id]
         # =======================得到 txt的数字化token 结束 =================================
 
-
         # ====================处理prompt ==============================================
         try:
-            if "question" in sample['extra']: #if sample['task'] == '<TEXT2TEXT>':
+            if "question" in sample['extra']:  # if sample['task'] == '<TEXT2TEXT>':
                 question = sample['extra'].get('question', "")
                 if question == "":
                     utils_file.logging_info(f"error: question is empty, {sample}")
@@ -754,8 +838,6 @@ def tokenize(data, tokenizer: HuggingFaceTokenizer, other_tokenze_conf={}, globa
             continue
         # ====================处理prompt 结束 =======================================
 
-
-
         # ========================处理speech token ================================
         if task_name == "<S2TCHAT> <TEXT2TOKEN>" or task_name == "<S2TCHAT> <TEXT2TOKEN> <THINK>" or task_name == "<TEXT2TOKEN>" or task_name == "<TEXT2TOKEN> <STREAMING>":
             if "speech_token" in final_extra:
@@ -776,8 +858,6 @@ def tokenize(data, tokenizer: HuggingFaceTokenizer, other_tokenze_conf={}, globa
             sample['speech_token'] = []
         # ========================处理speech token 结束 ==========================
 
-
-
         # =====================处理output_type======================
         # tts
         if task_name == "<TEXT2TOKEN>":
@@ -795,15 +875,15 @@ def tokenize(data, tokenizer: HuggingFaceTokenizer, other_tokenze_conf={}, globa
         elif task_name == "<TEXT2TEXT>":
             sample['output_type'] = 'text2text'
         elif task_name == "<S2TCHAT>":
-            sample['output_type'] ='s2t_chat'
+            sample['output_type'] = 's2t_chat'
         elif task_name == "<S2TCHAT_FAKE>":
-            sample['output_type'] ='s2t_chat_fake'
+            sample['output_type'] = 's2t_chat_fake'
         elif task_name == "<S2TCHAT> <THINKER>":
-            sample['output_type'] ='s2t_chat_think'
+            sample['output_type'] = 's2t_chat_think'
         else:
-           sample['output_type'] = 'text'
+            sample['output_type'] = 'text'
         utils_file.logging_limit_print(f"output_type: {sample['output_type']}")
-            # s2t end
+        # s2t end
         # =====================处理output_type 结束======================
         yield sample
 
@@ -849,7 +929,8 @@ def filter(data,
 
         output_type = sample["output_type"]
         if other_filter_conf.get("only_s2s", False):
-            if output_type not in ['speech2text_token', 'speech2text_token_streaming', 'speech2text_token_think', 'speech2text_token_history']:
+            if output_type not in ['speech2text_token', 'speech2text_token_streaming', 'speech2text_token_think',
+                                   'speech2text_token_history']:
                 utils_file.logging_error(
                     f"only_s2s, output_type is not speech2text_token or speech2text_token_streaming,speech2text_token_think,speech2text_token_history, continue, output_type: {output_type}")
                 continue
@@ -966,8 +1047,9 @@ def filter(data,
         #     if len(sample['label']) / num_frames > max_output_input_ratio:
         #         continue
 
-
-        if sample["output_type"] == "speech2text_token" or sample["output_type"] == "speech2text_token_streaming" or sample["output_type"] == "speech2text_token_think" or sample["output_type"] == "speech2text_token_history":
+        if sample["output_type"] == "speech2text_token" or sample["output_type"] == "speech2text_token_streaming" or \
+                sample["output_type"] == "speech2text_token_think" or sample[
+            "output_type"] == "speech2text_token_history":
             seq_len = len(sample['prompt']) + num_frames / 8 + len(sample['label']) + len(sample['speech_token'])
         elif sample["output_type"] == "text2token" or sample["output_type"] == "text2token_streaming":
             seq_len = len(sample['prompt']) + len(sample['label']) + len(sample['speech_token'])
@@ -975,7 +1057,7 @@ def filter(data,
             seq_len = len(sample['prompt']) + num_frames / 8 + len(sample['label'])
         # utils_file.logging_limit_print(f'seqlen: {seq_len}, output_type:{sample["output_type"]},len(sample["prompt"]):{len(sample["prompt"])},num_frames / 8:{num_frames / 8},len(sample["label"]):{len(sample["label"])},len(sample["speech_token"]):{len(sample["speech_token"])} ')
         # for instruct llm
-        seq_len = seq_len + 29*2 + history_len
+        seq_len = seq_len + 29 * 2 + history_len
         if 0 < max_seq_len < seq_len:
             utils_file.logging_error(f"seqlen: {seq_len} 超过了最大长度:{max_seq_len}，contiune")
             continue
@@ -1105,10 +1187,10 @@ def compute_mfcc(data,
         yield sample
 
 
-def do_compute_log_mel_spectrogram(waveform,n_fft=400,
-                                hop_length=160,
-                                num_mel_bins=80,
-                                padding=0):
+def do_compute_log_mel_spectrogram(waveform, n_fft=400,
+                                   hop_length=160,
+                                   num_mel_bins=80,
+                                   padding=0):
     waveform = waveform.squeeze(0)  # (channel=1, sample) -> (sample,)
     # utils_file.logging_limit_print(f'wavform shape: {waveform.shape}')
     try:
@@ -1137,6 +1219,8 @@ def do_compute_log_mel_spectrogram(waveform,n_fft=400,
     except Exception as e:
         utils_file.logging_error(f'do_compute_log_mel_spectrogram error: {e}')
         return None
+
+
 def compute_log_mel_spectrogram(data,
                                 n_fft=400,
                                 hop_length=160,
@@ -1424,7 +1508,7 @@ def dynamic_batch(data, max_frames_in_batch=12000, max_seq_in_batch=10000000):
     longest_seq = 0
     max_frames_in_batch = max_frames_in_batch
 
-    buf_s2s_streaming = [] # for speech 2 text token streaming
+    buf_s2s_streaming = []  # for speech 2 text token streaming
     longest_frames_s2s_streaming = 0
     longest_seq_s2s_streaming = 0
     max_frames_in_batch_s2s_streaming = int(max_frames_in_batch)
@@ -1506,7 +1590,7 @@ def dynamic_batch(data, max_frames_in_batch=12000, max_seq_in_batch=10000000):
             new_seq = sample['feat'].size(0) / 8 + len(sample['label']) + len(sample.get('prompt', [])) + len(
                 sample.get('speech_token', []))
             # for instruct llm
-            new_seq = new_seq + 29 *2  + history_len
+            new_seq = new_seq + 29 * 2 + history_len
             longest_seq_token_s2s = max(longest_seq_token_s2s, new_seq)
             longest_frames_token_s2s = max(longest_frames_token_s2s, new_sample_frames)
             frames_after_padding_token_s2s = longest_frames_token_s2s * (len(buf_speech_token_s2s) + 1)
@@ -1518,11 +1602,11 @@ def dynamic_batch(data, max_frames_in_batch=12000, max_seq_in_batch=10000000):
                 longest_seq_token_s2s = new_seq
             else:
                 buf_speech_token_s2s.append(sample)
-        elif "output_type" in sample and sample["output_type"] =="speech2text_token_streaming":
+        elif "output_type" in sample and sample["output_type"] == "speech2text_token_streaming":
             new_seq = sample['feat'].size(0) / 8 + len(sample['label']) + len(sample.get('prompt', [])) + len(
                 sample.get('speech_token', []))
             # for instruct llm
-            new_seq = new_seq + 29 *2  + history_len
+            new_seq = new_seq + 29 * 2 + history_len
             longest_seq_s2s_streaming = max(longest_seq_s2s_streaming, new_seq)
             longest_frames_s2s_streaming = max(longest_frames_s2s_streaming, new_sample_frames)
             frames_after_padding_token = longest_frames_s2s_streaming * (len(buf_s2s_streaming) + 1)
@@ -1570,11 +1654,11 @@ def dynamic_batch(data, max_frames_in_batch=12000, max_seq_in_batch=10000000):
             new_seq = len(sample['label']) + len(sample.get('prompt', [])) + len(
                 sample.get('speech_token', []))
             # for instruct llm
-            new_seq = new_seq + 29 *2  + history_len
+            new_seq = new_seq + 29 * 2 + history_len
             longest_seq_token_with_text = max(longest_seq_token_with_text, new_seq)
             longest_frames_token_with_text = max(longest_frames_token_with_text, new_sample_frames)
             frames_after_padding_token_with_text = longest_frames_token_with_text * (
-                        len(buf_speech_token_with_text) + 1)
+                    len(buf_speech_token_with_text) + 1)
             seq_after_padding_token_with_text = longest_seq_token_with_text * (len(buf_speech_token_with_text) + 1)
             if frames_after_padding_token_with_text > max_frames_in_batch_token_with_text or seq_after_padding_token_with_text > max_seq_in_batch:
                 # utils_file.logging_limit_print('输出了t2s的batch')
@@ -1588,12 +1672,13 @@ def dynamic_batch(data, max_frames_in_batch=12000, max_seq_in_batch=10000000):
             new_seq = len(sample['label']) + len(sample.get('prompt', [])) + len(
                 sample.get('speech_token', []))
             # for instruct llm
-            new_seq = new_seq + 29 *2  + history_len
+            new_seq = new_seq + 29 * 2 + history_len
             longest_seq_token_with_text_streaming = max(longest_seq_token_with_text_streaming, new_seq)
             longest_frames_token_with_text_streaming = max(longest_frames_token_with_text_streaming, new_sample_frames)
             frames_after_padding_token_with_text_streaming = longest_frames_token_with_text_streaming * (
+                    len(buf_speech_token_with_text_streaming) + 1)
+            seq_after_padding_token_with_text_streaming = longest_seq_token_with_text_streaming * (
                         len(buf_speech_token_with_text_streaming) + 1)
-            seq_after_padding_token_with_text_streaming = longest_seq_token_with_text_streaming * (len(buf_speech_token_with_text_streaming) + 1)
             if frames_after_padding_token_with_text_streaming > max_frames_in_batch_token_with_text_streaming or seq_after_padding_token_with_text_streaming > max_seq_in_batch:
                 # utils_file.logging_limit_print('输出了t2s的batch streaming')
                 yield buf_speech_token_with_text_streaming
@@ -1606,12 +1691,12 @@ def dynamic_batch(data, max_frames_in_batch=12000, max_seq_in_batch=10000000):
             new_seq = len(sample['label']) + len(sample.get('prompt', [])) + len(
                 sample.get('speech_token', []))
             # for instruct llm
-            new_seq = new_seq + 29 *2  + history_len
+            new_seq = new_seq + 29 * 2 + history_len
             longest_seq_t2t = max(longest_seq_t2t, new_seq)
             longest_frames_t2t = max(longest_frames_t2t, new_sample_frames)
             frames_after_padding_t2t = longest_frames_t2t * (len(buf_t2t) + 1)
             seq_after_padding_t2t = longest_seq_t2t * (len(buf_t2t) + 1)
-            if frames_after_padding_t2t > max_frames_in_batch_t2t or seq_after_padding_t2t > max_seq_in_batch * 0.6: # t2t没有受到frames限制, 过长的t2t数据引入会导致爆显存，所以给总长度进行限制
+            if frames_after_padding_t2t > max_frames_in_batch_t2t or seq_after_padding_t2t > max_seq_in_batch * 0.6:  # t2t没有受到frames限制, 过长的t2t数据引入会导致爆显存，所以给总长度进行限制
                 yield buf_t2t
                 buf_t2t = [sample]
                 longest_frames_t2t = new_sample_frames
@@ -1620,7 +1705,7 @@ def dynamic_batch(data, max_frames_in_batch=12000, max_seq_in_batch=10000000):
                 buf_t2t.append(sample)
         elif "output_type" in sample and sample["output_type"] == "s2t_chat":
             new_seq = sample['feat'].size(0) / 8 + len(sample['label']) + len(sample.get('prompt', []))
-            new_seq = new_seq + 29 *2  + history_len
+            new_seq = new_seq + 29 * 2 + history_len
             longest_seq_s2t_chat = max(longest_seq_s2t_chat, new_seq)
             longest_frames_s2t_chat = max(longest_frames_s2t_chat, new_sample_frames)
             frames_after_padding_s2t_chat = longest_frames_s2t_chat * (len(buf_s2t_chat) + 1)
@@ -1634,7 +1719,7 @@ def dynamic_batch(data, max_frames_in_batch=12000, max_seq_in_batch=10000000):
                 buf_s2t_chat.append(sample)
         elif "output_type" in sample and sample["output_type"] == "s2t_chat_fake":
             new_seq = sample['feat'].size(0) / 8 + len(sample['label']) + len(sample.get('prompt', []))
-            new_seq = new_seq + 29 *2  + history_len
+            new_seq = new_seq + 29 * 2 + history_len
             longest_seq_s2t_chat_fake = max(longest_seq_s2t_chat_fake, new_seq)
             longest_frames_s2t_chat_fake = max(longest_frames_s2t_chat_fake, new_sample_frames)
             frames_after_padding_s2t_chat_fake = longest_frames_s2t_chat_fake * (len(buf_s2t_chat_fake) + 1)
@@ -1648,7 +1733,7 @@ def dynamic_batch(data, max_frames_in_batch=12000, max_seq_in_batch=10000000):
                 buf_s2t_chat_fake.append(sample)
         elif "output_type" in sample and sample["output_type"] == "s2t_chat_think":
             new_seq = sample['feat'].size(0) / 8 + len(sample['label']) + len(sample.get('prompt', []))
-            new_seq = new_seq + 29 *2  + history_len
+            new_seq = new_seq + 29 * 2 + history_len
             longest_seq_s2t_chat_think = max(longest_seq_s2t_chat_think, new_seq)
             longest_frames_s2t_chat_think = max(longest_frames_s2t_chat_think, new_sample_frames)
             frames_after_padding_s2t_chat_think = longest_frames_s2t_chat_think * (len(buf_s2t_chat_think) + 1)
@@ -1665,7 +1750,7 @@ def dynamic_batch(data, max_frames_in_batch=12000, max_seq_in_batch=10000000):
                 # 没有prompt的text任务的放在一起
                 new_seq = sample['feat'].size(0) / 8 + len(sample['label']) + len(sample.get('prompt', []))
                 # for instruct llm
-                new_seq = new_seq + 29 *2  + history_len
+                new_seq = new_seq + 29 * 2 + history_len
                 longest_seq_no_prompt = max(longest_seq_no_prompt, new_seq)
                 longest_frames_no_prompt = max(longest_frames_no_prompt, new_sample_frames)
                 frames_after_padding_no_prompt = longest_frames * (len(buf_no_prompt) + 1)
@@ -1680,7 +1765,7 @@ def dynamic_batch(data, max_frames_in_batch=12000, max_seq_in_batch=10000000):
             else:
                 new_seq = sample['feat'].size(0) / 8 + len(sample['label']) + len(sample.get('prompt', []))
                 # for instruct llm
-                new_seq = new_seq + 29 *2  + history_len
+                new_seq = new_seq + 29 * 2 + history_len
                 longest_seq = max(longest_seq, new_seq)
                 longest_frames = max(longest_frames, new_sample_frames)
                 frames_after_padding = longest_frames * (len(buf) + 1)
@@ -1744,7 +1829,7 @@ def padding(data):
         #     utils_file.logging_limit_print(feat_item.shape)
         # utils_file.logging_limit_print('------------------')
 
-        if len(sorted_feats)==0:
+        if len(sorted_feats) == 0:
             utils_file.logging_info(f'empty feats, output_type')
             continue
         padded_feats = pad_sequence(sorted_feats,
@@ -1819,7 +1904,7 @@ def padding(data):
         history_batch = []
         for i in order:
             if 'history' in sample[i]:
-                history_batch.append(sample[i].get("history",[]))
+                history_batch.append(sample[i].get("history", []))
             else:
                 history_batch.append([])
         batch['history'] = history_batch

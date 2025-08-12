@@ -694,9 +694,9 @@ def tokenize(data, tokenizer: HuggingFaceTokenizer, other_tokenze_conf={}, globa
         # =======================对tts任务处理结束=======================================
 
 
-        emotion_tag, txt = process_tagged_string(txt) # 如果开头没<中立>，则加上<中立>
         # =======================处理s2t think========================================
         if task_name == "<S2TCHAT> <THINKER>":
+            emotion_tag, txt = process_tagged_string(txt)  # 如果开头没<中立>，则加上<中立>
             if 'think_str' in final_extra:
                 think_str = final_extra['think_str']
                 txt = f'<think>{think_str}<think end>{txt}'
@@ -707,6 +707,7 @@ def tokenize(data, tokenizer: HuggingFaceTokenizer, other_tokenze_conf={}, globa
 
         # ===================处理s2s think============================================
         if task_name == "<S2TCHAT> <TEXT2TOKEN> <THINK>":
+            emotion_tag, txt = process_tagged_string(txt)  # 如果开头没<中立>，则加上<中立>
             if 'think_str' in final_extra:
                 think_str = final_extra['think_str']
                 txt = f'<think>{think_str}<think end>{txt}'

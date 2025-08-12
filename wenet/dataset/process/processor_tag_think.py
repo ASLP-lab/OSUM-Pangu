@@ -593,6 +593,9 @@ def if_have_other_name(text):
 emotion_tags = {"<HAPPY>", "<SAD>", "<ANGRY>", "<ANGER>", "<FEAR>", "<DISGUST>", "<SURPRISE>", "<NEUTRAL>"}
 answer_emotion_tags = {"<ANGER>", "<FEAR>", "<HAPPY>", "<SURPRISE>", "<SAD>", "<DISGUST>", "<CONFUSED>", "<SARCASM>",
                        "<EMBARRASSED>", "<CURIOUS>", "<WORRIED>", "<SHY>", "<SORRY>", "<NEUTRAL>", }
+new_answer_emotion_tags = {
+"愉悦" ,"抱歉", "开心" ,"愤怒" , "惊讶" ,"厌恶" ,"悲伤", "害怕", "哭腔" ,"安慰鼓励" ,"中立"
+}
 age_tags = {"<CHILD>", "<ADULT>", "<OLD>"}
 gender_tags = {"<MALE>", "<FEMALE>"}
 none_tags = {"<NONE>", "<NULL>", "<None>", "<none>", "<null>"}
@@ -701,9 +704,9 @@ def tokenize(data, tokenizer: HuggingFaceTokenizer, other_tokenze_conf={}, globa
                 sample['task'] = task_name
         # =======================对tts任务处理结束=======================================
 
-        emotion_tag, txt = process_tagged_string(txt)  # 如果开头没<中立>，则加上<中立>
         # =======================处理s2t think========================================
         if task_name == "<S2TCHAT> <THINKER>":
+            emotion_tag, txt = process_tagged_string(txt)  # 如果开头没<中立>，则加上<中立>
             q_txt = final_extra.get("q_txt", None)
             if q_txt is None:
                 q_txt = final_extra.get("question", None)
@@ -725,9 +728,9 @@ def tokenize(data, tokenizer: HuggingFaceTokenizer, other_tokenze_conf={}, globa
             else:
                 q_emotion_tag = unk_tag if is_unk else "<NEUTRAL>"
 
-            if emotion_tag not in answer_emotion_tags or emotion_tag == "<NEUTRAL>":
+            if emotion_tag not in new_answer_emotion_tags or emotion_tag == "<中立>":
                 old_emotion_tag = emotion_tag
-                emotion_tag = unk_tag if is_unk else "<NEUTRAL>"
+                emotion_tag = unk_tag if is_unk else "<中立>"
                 if is_unk:
                     txt = txt.replace(old_emotion_tag, emotion_tag)
 
@@ -752,6 +755,7 @@ def tokenize(data, tokenizer: HuggingFaceTokenizer, other_tokenze_conf={}, globa
 
         # ===================处理s2s think============================================
         if task_name == "<S2TCHAT> <TEXT2TOKEN> <THINK>":
+            emotion_tag, txt = process_tagged_string(txt)  # 如果开头没<中立>，则加上<中立>
             q_txt = final_extra.get("q_txt", None)
             if q_txt is None:
                 q_txt = final_extra.get("question", None)
