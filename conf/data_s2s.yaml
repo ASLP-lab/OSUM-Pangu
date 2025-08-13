@@ -197,3 +197,13 @@ gaozhiliang_gbma:
 
 # ======================================s2s 副语言  no thinking end=====================================
 
+
+
+S2SChat_osum_setting_qa_527_updated_by_cywang_added_by_20250616:
+  huawei_path: /mnt/sfs/asr/update_data/S2SChat_osum_setting_qa_527_updated_by_cywang_added_by_20250616/shards_list.txt
+  new_data_list: /home/work_nfs16/cywang/workspace/OSUM/osum_setting/updated/osum_setting_qa_527_updated.jsonl
+  new_lab_path: /home/work_nfs11/cywang/data/shard/S2Chat/osum_setting_qa_527_updated/shards_list.txt
+  path: /home/A02_tmpdata3/osum_s2s/S2SChat_osum_setting_qa_527_updated_by_cywang_added_by_20250616/shards_list.txt
+  shard_num: 8
+  description: "osum_setting_qa_527_updated, 自我介绍数据"
+  weight: 20

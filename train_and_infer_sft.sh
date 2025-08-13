@@ -15,7 +15,7 @@ export CPU_AFFINITY_CONF=1 # 绑核
 export TASK_QUEUE_ENABLE=2 # 优化下发队列
 # You can also manually specify CUDA_VISIBLE_DEVICES
 # if you don't want to utilize all available GPU resources.
-export CUDA_VISIBLE_DEVICES="0"
+export CUDA_VISIBLE_DEVICES="7"
 #export CUDA_VISIBLE_DEVICES="2"
 echo "CUDA_VISIBLE_DEVICES is ${CUDA_VISIBLE_DEVICES}"
 export PYTHONPATH=./
@@ -37,7 +37,7 @@ stop_stage=0
 # You should change the following two parameters for multiple machine training,
 # see https://pytorch.org/docs/stable/elastic/run.html
 #HOST_NODE_ADDR=192.168.0.38
-HOST_NODE_ADDR=10.21.4.4
+HOST_NODE_ADDR=10.21.4.3
 HOST_PORT=29401
 # HOST_NODE_ADDR="127.0.0.1:29401"
 num_nodes=1
