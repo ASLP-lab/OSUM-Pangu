@@ -15,7 +15,7 @@ export CPU_AFFINITY_CONF=1 # 绑核
 export TASK_QUEUE_ENABLE=2 # 优化下发队列
 # You can also manually specify CUDA_VISIBLE_DEVICES
 # if you don't want to utilize all available GPU resources.
-export CUDA_VISIBLE_DEVICES="0,1,2,3,4,5,6"
+export CUDA_VISIBLE_DEVICES="0,1,2,3,4,5,6,7"
 #export CUDA_VISIBLE_DEVICES="2"
 echo "CUDA_VISIBLE_DEVICES is ${CUDA_VISIBLE_DEVICES}"
 export PYTHONPATH=./
