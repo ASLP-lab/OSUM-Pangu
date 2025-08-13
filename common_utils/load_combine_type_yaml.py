@@ -7,8 +7,8 @@ from gxl_ai_utils.utils import utils_file
 data_config_path, tmp_file_path = utils_file.do_get_commandline_param(2)
 # random.seed(10086)# 老的
 # 把当前时间戳作为随机种子
-# random.seed(int(time.time()))
-random.seed(7891)# 尝试一下新的顺序  #7890
+random.seed(int(time.time()))
+# random.seed(7891)# 尝试一下新的顺序  #7890
 data_info_dict = utils_file.load_dict_from_yaml(data_config_path)
 if data_info_dict is None:
     data_info_dict = {}
