@@ -196,7 +196,7 @@ emotion_stage2_add:
   lab_path: "/home/xlgeng/sdb2/emotion_stage2_add/shards_list.txt"
   huawei_path: "/mnt/sfs/asr/emotion_stage2_add/shards_list.txt"
   shard_num: 44
-  weight: 0.1 # 150h
+  weight: 1 # 150h
 emotion_stage3_add:
   path: "/home/A02_tmpdata3/osum_s2s/emotion_stage3_add/shards_list.txt"
   lab_path: "/home/xlgeng/sdb2/emotion_stage3_add/shards_list.txt"
@@ -208,13 +208,13 @@ emotion_stage4_add:
   lab_path: "/home/xlgeng/sdb2/emotion_stage4_add/shards_list.txt"
   huawei_path: "/mnt/sfs/asr/emotion_stage4_add/shards_list.txt"
   shard_num: 54
-  weight: 0.1 #100h
+  weight: 1 #100h
 emotion_stage5_add:
   path: "/home/A02_tmpdata3/osum_s2s/emotion_stage5_add/shards_list.txt"
   lab_path: "/home/xlgeng/sdb2/emotion_stage5_add/shards_list.txt"
   shard_num: 53
   huawei_path: "/mnt/sfs/asr/emotion_stage5_add/shards_list.txt"
-  weight: 0.1
+  weight: 1
 
 emotion_meld:
   path: "/home/A02_tmpdata3/osum_s2s/emotion_meld/shards_list.txt"
