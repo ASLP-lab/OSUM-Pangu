@@ -49,7 +49,7 @@ gxl_data_json_info_path_t2s=conf/data_t2s.yaml
 gxl_data_json_info_path_s2s=conf/data_s2s.yaml
 gxl_data_json_info_path_t2t=conf/data_t2t.yaml
 
-
+# epoch0 是
 
 # dir=$exp_path/qwen2_multi_task_4_6gpus_gxl_adapter/epoch_12_13_with_speech_gxl_with_asr-chat
 dir=/home/A02_tmpdata2/ckpt/osum_chat_new_start_0810/epoch3_s2t_t2s_t2t_s2s_hq_language_think
