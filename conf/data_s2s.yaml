@@ -127,7 +127,7 @@ emotion_30K_sensevoice_no_thinking:
 S2SChat_osum_setting_qa_527_updated_by_cywang_added_by_20250616:
   path: /home/A02_tmpdata3/osum_s2s/S2SChat_osum_setting_qa_527_updated_by_cywang_added_by_20250616/raw_data/s2s_handle/xlgeng_new_data/s2s_no_thinking/doubao/combines_list.txt
   shard_num: 8
-  weight: 10
+  weight: 20
 
 # -------------------------------------------s2s 副语言 no thinking end-------------------------------------------
 
