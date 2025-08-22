@@ -37,7 +37,7 @@ stop_stage=0
 # You should change the following two parameters for multiple machine training,
 # see https://pytorch.org/docs/stable/elastic/run.html
 #HOST_NODE_ADDR=192.168.0.38
-HOST_NODE_ADDR=10.21.4.3
+HOST_NODE_ADDR=10.21.4.4
 HOST_PORT=29408
 # HOST_NODE_ADDR="127.0.0.1:29401"
 num_nodes=1
@@ -52,7 +52,7 @@ gxl_data_json_info_path_t2t=conf/data_t2t.yaml
 
 
 # dir=$exp_path/qwen2_multi_task_4_6gpus_gxl_adapter/epoch_12_13_with_speech_gxl_with_asr-chat
-dir=/home/A02_tmpdata2/ckpt/osum_chat_new_start_0810/epoch2_s2t_t2s_t2t_s2s_hq_tag_think
+dir=/home/A02_tmpdata2/ckpt/osum_chat_new_start_0810/epoch3_s2t_t2s_t2t_s2s_hq_tag_think
 #checkpoint=/home/A02_tmpdata3/ckpt/osum_chat/epoch0_all_data/step_10624.pt
 #checkpoint=/home/A02_tmpdata3/ckpt/osum_chat/epoch0_all_data/step_14374.pt
 #checkpoint=/home/A02_tmpdata3/ckpt/osum_chat/epoch1_all_data/step_2816.pt
@@ -63,8 +63,8 @@ dir=/home/A02_tmpdata2/ckpt/osum_chat_new_start_0810/epoch2_s2t_t2s_t2t_s2s_hq_t
 #checkpoint=/home/A02_tmpdata2/ckpt/osum_chat_new_start_0810/epoch0_s2t_t2s_t2t_s2s_tag_think/step_7499.pt
 #checkpoint=/home/A02_tmpdata2/ckpt/osum_chat_new_start_0810/epoch0_s2t_t2s_t2t_s2s_tag_think/step_17499.pt
 #checkpoint=/home/A02_tmpdata2/ckpt/osum_chat_new_start_0810/epoch0_s2t_t2s_t2t_s2s_tag_think/step_19999.pt
-checkpoint=/home/A02_tmpdata2/ckpt/osum_chat_new_start_0810/epoch1_s2t_t2s_t2t_s2s_hq_tag_think/step_24999.pt
-
+#checkpoint=/home/A02_tmpdata2/ckpt/osum_chat_new_start_0810/epoch1_s2t_t2s_t2t_s2s_hq_tag_think/step_24999.pt
+checkpoint=/home/A02_tmpdata2/ckpt/osum_chat_new_start_0810/epoch2_s2t_t2s_t2t_s2s_hq_tag_think_new/step_16249.pt
 mkdir -p $dir
 data=$dir/data
 mkdir -p $data
