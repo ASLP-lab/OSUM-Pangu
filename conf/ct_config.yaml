@@ -31,7 +31,7 @@ fire_module: link_and_encoder_and_lora  # link  encoder llm  link_and_encoder li
 grad_clip: 5
 accum_grad: 8
 log_interval: 10
-save_interval: 1250 #1250 #2500
+save_interval: 300 #1250 #2500
 max_epoch: 1
 init_step: true
 
