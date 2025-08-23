@@ -42,7 +42,7 @@ optim_conf:
   - 0.9
   - 0.99
   eps: 1.0e-06
-  lr: 5.0e-06
+  lr: 1.0e-06
   weight_decay: 0.01
 scheduler: warmuplr
 scheduler_conf:
