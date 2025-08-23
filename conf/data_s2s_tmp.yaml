@@ -1,13 +1,17 @@
 #  ===========================副语言 s2s thinking ===================================
+age_gender_common:
+  path: /home/A02_tmpdata3/osum_s2s/gender/xlgeng_new_data/s2s_thinking/doubao/combines_list.txt
+  tar_num: 1511
+  weight: 0.5
 
 only_child:
   path: "/home/A02_tmpdata3/osum_s2s/gender/xlgeng_new_data/s2s_thinking/doubao/data_child/combines_list.txt"
   tar_num: 110
   weight: 10
-#only_old:
-#  path: "/home/A02_tmpdata3/osum_s2s/gender/xlgeng_new_data/s2s_thinking/doubao/data_old/combines_list.txt"
-#  tar_num: 7
-#  weight: 50
+only_old:
+  path: /home/A02_tmpdata3/osum_s2s/gender_old/xlgeng_new_data/s2s_think/combines_list.txt
+  tar_num: 7
+  weight: 50
 
 
 # emotion
@@ -32,15 +36,19 @@ S2SChat_osum_setting_qa_527_updated_by_cywang_added_by_20250616_think:
 
 
 #  ===========================副语言 s2s no thinking ===================================
+age_gender_common_no_thinking:
+  path: /home/A02_tmpdata3/osum_s2s/gender/xlgeng_new_data/s2s_no_thinking/doubao/combines_list.txt
+  tar_num: 1511
+  weight: 0.5
 
 only_child_no_thinking:
   path: "/home/A02_tmpdata3/osum_s2s/gender/xlgeng_new_data/s2s_no_thinking/doubao/data_child/combines_list.txt"
   tar_num: 110
   weight: 10
-#only_old_no_thinking:
-#  path: "/home/A02_tmpdata3/osum_s2s/gender/xlgeng_new_data/s2s_no_thinking/doubao/data_old/combines_list.txt"
-#  tar_num: 7
-#  weight: 50
+only_old_no_thinking:
+  path: /home/A02_tmpdata3/osum_s2s/gender_old/xlgeng_new_data/s2s_no_think/combines_list.txt
+  tar_num: 7
+  weight: 50
 
 # emotion
 emotion_100K_sensevoice_no_thinking:
