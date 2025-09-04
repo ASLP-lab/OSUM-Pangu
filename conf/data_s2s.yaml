@@ -8,11 +8,11 @@ age_gender_common:
 only_child:
   path: "/home/A02_tmpdata3/osum_s2s/gender/xlgeng_new_data/s2s_thinking/doubao/data_child/combines_list.txt"
   tar_num: 110
-  weight: 10
+  weight: 2
 only_old:
   path: /home/A02_tmpdata3/osum_s2s/gender_old/xlgeng_new_data/s2s_think/combines_list.txt
   tar_num: 7
-  weight: 50
+  weight: 5
 
 gender_xianshi:
   path: /home/A02_tmpdata3/osum_s2s/sex_xianshi_cosyvoice2_by_cywang_added_by_20250625/raw_data/s2s_handle/xlgeng_new_data/s2s_thinking/doubao/combines_list.txt
@@ -85,11 +85,11 @@ age_gender_common_no_thinking:
 only_child_no_thinking:
   path: "/home/A02_tmpdata3/osum_s2s/gender/xlgeng_new_data/s2s_no_thinking/doubao/data_child/combines_list.txt"
   tar_num: 110
-  weight: 10
+  weight: 2
 only_old_no_thinking:
   path: /home/A02_tmpdata3/osum_s2s/gender_old/xlgeng_new_data/s2s_no_think/combines_list.txt
   tar_num: 7
-  weight: 50
+  weight: 5
 
 gender_xianshi_no_thinking:
   path: /home/A02_tmpdata3/osum_s2s/sex_xianshi_cosyvoice2_by_cywang_added_by_20250625/raw_data/s2s_handle/xlgeng_new_data/s2s_no_thinking/doubao/combines_list.txt
