@@ -38,7 +38,7 @@ stop_stage=0
 # see https://pytorch.org/docs/stable/elastic/run.html
 #HOST_NODE_ADDR=192.168.0.38
 HOST_NODE_ADDR=127.0.0.1
-HOST_PORT=29401
+HOST_PORT=29402
 # HOST_NODE_ADDR="127.0.0.1:29401"
 num_nodes=1
 job_id=2023
