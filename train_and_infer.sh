@@ -37,17 +37,23 @@ stop_stage=0
 # You should change the following two parameters for multiple machine training,
 # see https://pytorch.org/docs/stable/elastic/run.html
 #HOST_NODE_ADDR=192.168.0.38
-HOST_NODE_ADDR=10.21.4.2
+HOST_NODE_ADDR=127.0.0.1
 HOST_PORT=29401
 # HOST_NODE_ADDR="127.0.0.1:29401"
 num_nodes=1
 job_id=2023
 
 train_config=conf/ct_config.yaml
-gxl_data_json_info_path_s2t=conf/empty.yaml
-gxl_data_json_info_path_t2s=conf/empty.yaml
-gxl_data_json_info_path_s2s=conf/data_s2s_tmp.yaml
-gxl_data_json_info_path_t2t=conf/empty.yaml
+#gxl_data_json_info_path_s2t=conf/empty.yaml
+#gxl_data_json_info_path_t2s=conf/empty.yaml
+#gxl_data_json_info_path_s2s=conf/data_s2s_tmp.yaml
+#gxl_data_json_info_path_t2t=conf/empty.yaml
+# ---------------------------------
+
+gxl_data_json_info_path_s2t=conf/data_s2t.yaml
+gxl_data_json_info_path_t2s=conf/data_t2s.yaml
+gxl_data_json_info_path_s2s=conf/data_s2s.yaml
+gxl_data_json_info_path_t2t=conf/data_t2t.yaml
 
 # 自然语言think的训练数据
 # epoch0 是 使用kokoro数据训练的，在内容层面先用kokoro数据训练出效果，先不管音质。
@@ -55,6 +61,7 @@ gxl_data_json_info_path_t2t=conf/empty.yaml
 # epoch2 是 在豆包tts数据训练后，发现了一个问题， 波浪号没有停顿， 重新构造了数据，继续训练epoch2. 训练到了8749stap.
 # epoch3 ，是真正的第三轮， 高质量数据的第二轮，在epoch2结束的时候，发现了模型only X 的结果有问题， 正好启动epoch3并修复bug
 # epoch4 ，上一轮报了share memory out错误。
+# epoch5 ， 修复了share memory out错误， 并继续训练， 训练到13749stap.
 # --------------------
 # tag think的训练数据
 # epoch0 是 使用kokoro数据训练的，在内容层面先用kokoro数据训练出效果，先不管音质。
@@ -63,7 +70,7 @@ gxl_data_json_info_path_t2t=conf/empty.yaml
 
 
 # dir=$exp_path/qwen2_multi_task_4_6gpus_gxl_adapter/epoch_12_13_with_speech_gxl_with_asr-chat
-dir=/home/A02_tmpdata2/ckpt/osum_chat_new_start_0810/epoch5_s2t_t2s_t2t_s2s_hq_language_think_sft2
+dir=/home/A02_tmpdata1/ckpt/osum_chat_new_start_0810/epoch6_add_emotion_raw_in_no_think
 #checkpoint=/home/A02_tmpdata3/ckpt/osum_chat/epoch0_all_data/step_10624.pt
 #checkpoint=/home/A02_tmpdata3/ckpt/osum_chat/epoch0_all_data/step_14374.pt
 #checkpoint=/home/A02_tmpdata3/ckpt/osum_chat/epoch1_all_data/step_2816.pt
@@ -78,8 +85,9 @@ dir=/home/A02_tmpdata2/ckpt/osum_chat_new_start_0810/epoch5_s2t_t2s_t2t_s2s_hq_l
 #checkpoint=/home/A02_tmpdata2/ckpt/osum_chat_new_start_0810/epoch3_s2t_t2s_t2t_s2s_hq_language_think/step_27499.pt
 #checkpoint=/home/A02_tmpdata2/ckpt/osum_chat_new_start_0810/epoch4_s2t_t2s_t2t_s2s_hq_language_think/step_23749.pt
 #checkpoint=/home/A02_tmpdata2/ckpt/osum_chat_new_start_0810/epoch4_s2t_t2s_t2t_s2s_hq_language_think_new/step_49999.pt
-#checkpoint=/home/A02_tmpdata2/ckpt/osum_chat_new_start_0810/epoch5_s2t_t2s_t2t_s2s_hq_language_think/step_13749.pt
-checkpoint=/home/A02_tmpdata2/ckpt/osum_chat_new_start_0810/epoch5_s2t_t2s_t2t_s2s_hq_language_think_sft/step_599.pt
+checkpoint=/home/A02_tmpdata2/ckpt/osum_chat_new_start_0810/epoch5_s2t_t2s_t2t_s2s_hq_language_think/step_13749.pt
+#checkpoint=/home/A02_tmpdata2/ckpt/osum_chat_new_start_0810/epoch5_s2t_t2s_t2t_s2s_hq_language_think_sft/step_599.pt
+
 mkdir -p $dir
 data=$dir/data
 mkdir -p $data

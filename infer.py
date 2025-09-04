@@ -31,3 +31,4 @@ def load_model_and_tokenizer(checkpoint_path, config_path):
     print(f"模型 {checkpoint_path} 加载完成并移动到 {device}")
     return model, tokenizer
 
+
