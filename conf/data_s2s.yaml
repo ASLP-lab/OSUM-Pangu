@@ -58,11 +58,11 @@ caption_xianshi:
 emotion_100K_sensevoice:
   path: /home/A02_tmpdata3/osum_s2s/emotion_yinshi_zxzhao_with_q_emo_by_cywang_added_by_20250701/handle_data/s2s_handle/xlgeng_new_data/s2s_thinking/doubao/combines_list.txt
   tar_num: 107
-  weight: 10
+  weight: 20
 emotion_100K_sensevoice_thinking_raw:
   path: "/home/A02_tmpdata3/osum_s2s/emotion_yinshi_zxzhao_with_q_emo_by_cywang_added_by_20250701/handle_data/s2s_handle/xlgeng_new_data/s2s_think_raw/combines_list.txt"
   tar_num: 107
-  weight: 10
+  weight: 20
 
 
 emotion_30K_sensevoice:
@@ -73,7 +73,7 @@ emotion_30K_sensevoice:
 S2SChat_osum_setting_qa_527_updated_by_cywang_added_by_20250616_think:
   path: /home/A02_tmpdata3/osum_s2s/S2SChat_osum_setting_qa_527_updated_by_cywang_added_by_20250616/raw_data/s2s_handle/xlgeng_new_data/s2s_thinking/doubao/combines_list.txt
   shard_num: 8
-  weight: 100
+  weight: 50
 
 # ======================================s2s 副语言 thinking end=====================================
 
@@ -138,12 +138,12 @@ caption_xianshi_no_thinking:
 emotion_100K_sensevoice_no_thinking:
   path: /home/A02_tmpdata3/osum_s2s/emotion_yinshi_zxzhao_with_q_emo_by_cywang_added_by_20250701/handle_data/s2s_handle/xlgeng_new_data/s2s_no_thinking/doubao/combines_list.txt
   tar_num: 107
-  weight: 10
+  weight: 20
 
 emotion_100K_sensevoice_no_thinking_raw:
   path: "/home/A02_tmpdata3/osum_s2s/emotion_yinshi_zxzhao_with_q_emo_by_cywang_added_by_20250701/handle_data/s2s_handle/xlgeng_new_data/s2s_no_think_raw/combines_list.txt"
   tar_num: 107
-  weight: 10
+  weight: 20
 
 
 emotion_30K_sensevoice_no_thinking:
@@ -154,7 +154,7 @@ emotion_30K_sensevoice_no_thinking:
 S2SChat_osum_setting_qa_527_updated_by_cywang_added_by_20250616:
   path: /home/A02_tmpdata3/osum_s2s/S2SChat_osum_setting_qa_527_updated_by_cywang_added_by_20250616/raw_data/s2s_handle/xlgeng_new_data/s2s_no_thinking/doubao/combines_list.txt
   shard_num: 8
-  weight: 100
+  weight: 50
 
 # -------------------------------------------s2s 副语言 no thinking end-------------------------------------------
 

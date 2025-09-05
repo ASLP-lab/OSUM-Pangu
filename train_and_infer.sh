@@ -87,6 +87,7 @@ dir=/home/A02_tmpdata1/ckpt/osum_chat_new_start_0810/epoch6_add_emotion_raw_in_n
 #checkpoint=/home/A02_tmpdata2/ckpt/osum_chat_new_start_0810/epoch4_s2t_t2s_t2t_s2s_hq_language_think_new/step_49999.pt
 checkpoint=/home/A02_tmpdata2/ckpt/osum_chat_new_start_0810/epoch5_s2t_t2s_t2t_s2s_hq_language_think/step_13749.pt
 #checkpoint=/home/A02_tmpdata2/ckpt/osum_chat_new_start_0810/epoch5_s2t_t2s_t2t_s2s_hq_language_think_sft/step_599.pt
+checkpoint=/home/A02_tmpdata1/ckpt/osum_chat_new_start_0810/epoch6_add_emotion_raw_in_no_think_hq_language_think/step_7499.pt
 
 mkdir -p $dir
 data=$dir/data
