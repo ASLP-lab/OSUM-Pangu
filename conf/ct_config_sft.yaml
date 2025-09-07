@@ -56,15 +56,15 @@ dataset_conf:
     batch_size: 26
     batch_type: dynamic
     max_frames_in_batch: 28000000 #3000 #9000 #3000 #3300 # 3900
-    max_seq_in_batch: 3700 #1500 #4000 #1100 #1600 # 1900
+    max_seq_in_batch: 5100 #1500 #4000 #1100 #1600 # 1900
   feats_type: log_mel_spectrogram
   filter_conf:
-    max_length: 20000
+    max_length: 200000
     min_length: 20
-    token_max_length: 1200
+    token_max_length: 12000
     token_min_length: 1
     filter_no_extra_info: true # 如果没有task lang 等信息,直接过滤掉, 适用于通用多任务训练, 推理时应该关掉
-    max_seq_len: 2000  #、1100 #1000
+    max_seq_len: 4000  #、1100 #1000
     other_filter_conf:
       only_s2s: false # 只针对与s2s dataloader的过滤
       only_s2t: false # 只针对与s2t dataloader的过滤
