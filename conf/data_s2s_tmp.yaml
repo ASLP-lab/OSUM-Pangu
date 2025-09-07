@@ -158,9 +158,9 @@ S2SChat_osum_setting_qa_527_updated_by_cywang_added_by_20250616:
 
 # -------------------------------------------s2s 副语言 no thinking end-------------------------------------------
 
-gaozhiliang_gbma:
-  path: /home/A02_tmpdata3/osum_s2s/gaozhiliang_gbma/combins_data/s2s_data/combines_list.txt
-  new_data_list: /home/node44_tmpdata3/netease/gbma/workspace/osum/data/process/0803/all_data_info.jsonl
-  new_lab_path: /home/work_nfs23/asr_data/data/osum_chat/s2s/gaozhiliang_gbma/shards_list.txt
-  shard_num: 24
-  weight: 20
+#gaozhiliang_gbma:
+#  path: /home/A02_tmpdata3/osum_s2s/gaozhiliang_gbma/combins_data/s2s_data/combines_list.txt
+#  new_data_list: /home/node44_tmpdata3/netease/gbma/workspace/osum/data/process/0803/all_data_info.jsonl
+#  new_lab_path: /home/work_nfs23/asr_data/data/osum_chat/s2s/gaozhiliang_gbma/shards_list.txt
+#  shard_num: 24
+#  weight: 20
