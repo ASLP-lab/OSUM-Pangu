@@ -50,6 +50,11 @@ gxl_data_json_info_path_t2s=conf/data_t2s_tmp.yaml
 gxl_data_json_info_path_s2s=conf/data_s2s_tmp.yaml
 gxl_data_json_info_path_t2t=conf/data_t2t_tmp.yaml
 
+gxl_data_json_info_path_s2t=conf/data_s2t.yaml
+gxl_data_json_info_path_t2s=conf/data_t2s.yaml
+gxl_data_json_info_path_s2s=conf/data_s2s.yaml
+gxl_data_json_info_path_t2t=conf/data_t2t.yaml
+
 
 
 # dir=$exp_path/qwen2_multi_task_4_6gpus_gxl_adapter/epoch_12_13_with_speech_gxl_with_asr-chat
