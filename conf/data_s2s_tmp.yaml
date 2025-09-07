@@ -1,22 +1,23 @@
 #  ===========================副语言 s2s thinking ===================================
+
+# age gender,
 age_gender_common:
   path: /home/A02_tmpdata3/osum_s2s/gender/xlgeng_new_data/s2s_thinking/doubao/combines_list.txt
   tar_num: 1511
-  weight: 0.5
-
+  weight: 0.1
 only_child:
   path: "/home/A02_tmpdata3/osum_s2s/gender/xlgeng_new_data/s2s_thinking/doubao/data_child/combines_list.txt"
   tar_num: 110
-  weight: 10
+  weight: 0.1
 only_old:
   path: /home/A02_tmpdata3/osum_s2s/gender_old/xlgeng_new_data/s2s_think/combines_list.txt
   tar_num: 7
-  weight: 50
+  weight: 1
 
 gender_xianshi:
   path: /home/A02_tmpdata3/osum_s2s/sex_xianshi_cosyvoice2_by_cywang_added_by_20250625/raw_data/s2s_handle/xlgeng_new_data/s2s_thinking/doubao/combines_list.txt
   tar_num: 30
-  weight: 2
+  weight: 0.2
 
 
 gender_yinshi_3k:
@@ -32,24 +33,24 @@ gender_yinshi_5k:
 age_xianshi:
   path: /home/A02_tmpdata3/osum_s2s/age_xianshi_cosyvoice2_by_cywang_added_by_20250625/raw_data/s2s_handle/xlgeng_new_data/s2s_thinking/doubao/combines_list.txt
   tar_num: 25
-  weight: 2
+  weight: 1
 
 
 # caption
 caption_common_7label:
   path: /home/A02_tmpdata3/osum_s2s/caption/raw_data/xlgeng_new_data/s2s_thinking/doubao/combines_list.txt
   tar_num: 162
-  weight: 1
+  weight: 0.2
 
 caption_common_50_label:
   path: /home/A02_tmpdata3/osum_s2s/caption_add_2025_1_6/raw_data/s2s_data_with_gender/xlgeng_new_data/s2s_thinking/doubao/combines_list.txt
   tar_num: 395  # 实际是196k
-  weight: 1
+  weight: 0.2
 
 caption_xianshi:
   path: /home/A02_tmpdata3/osum_s2s/caption_s2s_xianshi_20250806/raw_data/s2s_data/xlgeng_new_data/s2s_thinking/doubao/combines_list.txt
   tar_num: 6
-  weight: 2
+  weight: 1
 
 
 
@@ -57,17 +58,22 @@ caption_xianshi:
 emotion_100K_sensevoice:
   path: /home/A02_tmpdata3/osum_s2s/emotion_yinshi_zxzhao_with_q_emo_by_cywang_added_by_20250701/handle_data/s2s_handle/xlgeng_new_data/s2s_thinking/doubao/combines_list.txt
   tar_num: 107
-  weight: 5
+  weight: 1
+emotion_100K_sensevoice_thinking_raw:
+  path: "/home/A02_tmpdata3/osum_s2s/emotion_yinshi_zxzhao_with_q_emo_by_cywang_added_by_20250701/handle_data/s2s_handle/xlgeng_new_data/s2s_think_raw/combines_list.txt"
+  tar_num: 107
+  weight: 1
+
 
 emotion_30K_sensevoice:
   path: /home/A02_tmpdata3/emotion/中英混多音色情感数据库/s2s_handle/xlgeng_new_data/s2s_thinking/doubao/combines_list.txt
   tar_num: 33
-  weight: 5
+  weight: 1
 
 S2SChat_osum_setting_qa_527_updated_by_cywang_added_by_20250616_think:
   path: /home/A02_tmpdata3/osum_s2s/S2SChat_osum_setting_qa_527_updated_by_cywang_added_by_20250616/raw_data/s2s_handle/xlgeng_new_data/s2s_thinking/doubao/combines_list.txt
   shard_num: 8
-  weight: 100
+  weight: 1
 
 # ======================================s2s 副语言 thinking end=====================================
 
@@ -75,22 +81,20 @@ S2SChat_osum_setting_qa_527_updated_by_cywang_added_by_20250616_think:
 
 
 #  ===========================副语言 s2s no thinking ===================================
+
+# age gender,
 age_gender_common_no_thinking:
   path: /home/A02_tmpdata3/osum_s2s/gender/xlgeng_new_data/s2s_no_thinking/doubao/combines_list.txt
   tar_num: 1511
-  weight: 0.5
-
+  weight: 0.1
 only_child_no_thinking:
   path: "/home/A02_tmpdata3/osum_s2s/gender/xlgeng_new_data/s2s_no_thinking/doubao/data_child/combines_list.txt"
   tar_num: 110
-  weight: 10
+  weight: 0.2
 only_old_no_thinking:
   path: /home/A02_tmpdata3/osum_s2s/gender_old/xlgeng_new_data/s2s_no_think/combines_list.txt
   tar_num: 7
-  weight: 50
-
-
-
+  weight: 1
 
 gender_xianshi_no_thinking:
   path: /home/A02_tmpdata3/osum_s2s/sex_xianshi_cosyvoice2_by_cywang_added_by_20250625/raw_data/s2s_handle/xlgeng_new_data/s2s_no_thinking/doubao/combines_list.txt
@@ -110,41 +114,46 @@ gender_yinshi_5k_no_thinking:
 age_xianshi_no_thinking:
   path: /home/A02_tmpdata3/osum_s2s/age_xianshi_cosyvoice2_by_cywang_added_by_20250625/raw_data/s2s_handle/xlgeng_new_data/s2s_no_thinking/doubao/combines_list.txt
   tar_num: 25
-  weight: 2
+  weight: 1
 
 
 # caption
 caption_common_7label_no_thinking:
   path: /home/A02_tmpdata3/osum_s2s/caption/raw_data/xlgeng_new_data/s2s_no_thinking/doubao/combines_list.txt
   tar_num: 162
-  weight: 1
+  weight: 0.2
 
 caption_common_50_label_no_thinking:
   path: /home/A02_tmpdata3/osum_s2s/caption_add_2025_1_6/raw_data/s2s_data_with_gender/xlgeng_new_data/s2s_no_thinking/doubao/combines_list.txt
   tar_num: 395  # 实际是196k
-  weight: 1
+  weight: 0.2
 
 caption_xianshi_no_thinking:
   path: /home/A02_tmpdata3/osum_s2s/caption_s2s_xianshi_20250806/raw_data/s2s_data/xlgeng_new_data/s2s_no_thinking/doubao/combines_list.txt
   tar_num: 6
-  weight: 2
-
+  weight: 1
 
 
 # emotion
 emotion_100K_sensevoice_no_thinking:
   path: /home/A02_tmpdata3/osum_s2s/emotion_yinshi_zxzhao_with_q_emo_by_cywang_added_by_20250701/handle_data/s2s_handle/xlgeng_new_data/s2s_no_thinking/doubao/combines_list.txt
   tar_num: 107
-  weight: 5
+  weight: 1
+
+emotion_100K_sensevoice_no_thinking_raw:
+  path: "/home/A02_tmpdata3/osum_s2s/emotion_yinshi_zxzhao_with_q_emo_by_cywang_added_by_20250701/handle_data/s2s_handle/xlgeng_new_data/s2s_no_think_raw/combines_list.txt"
+  tar_num: 107
+  weight: 1
+
 
 emotion_30K_sensevoice_no_thinking:
   path: /home/A02_tmpdata3/emotion/中英混多音色情感数据库/s2s_handle/xlgeng_new_data/s2s_no_thinking/doubao/combines_list.txt
   tar_num: 33
-  weight: 5
+  weight: 1
 
 S2SChat_osum_setting_qa_527_updated_by_cywang_added_by_20250616:
   path: /home/A02_tmpdata3/osum_s2s/S2SChat_osum_setting_qa_527_updated_by_cywang_added_by_20250616/raw_data/s2s_handle/xlgeng_new_data/s2s_no_thinking/doubao/combines_list.txt
   shard_num: 8
-  weight: 100
+  weight: 1
 
 # -------------------------------------------s2s 副语言 no thinking end-------------------------------------------

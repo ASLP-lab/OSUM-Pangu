@@ -45,7 +45,7 @@ num_nodes=1
 job_id=2023
 
 train_config=conf/ct_config_sft.yaml
-gxl_data_json_info_path_s2t=conf/empty.yaml
+gxl_data_json_info_path_s2t=conf/data_s2s_tmp.yaml
 gxl_data_json_info_path_t2s=conf/empty.yaml
 gxl_data_json_info_path_s2s=conf/data_tmp.yaml
 gxl_data_json_info_path_t2t=conf/empty.yaml
@@ -53,7 +53,7 @@ gxl_data_json_info_path_t2t=conf/empty.yaml
 
 
 # dir=$exp_path/qwen2_multi_task_4_6gpus_gxl_adapter/epoch_12_13_with_speech_gxl_with_asr-chat
-dir=/home/A02_tmpdata2/ckpt/osum_chat_new_start_0810/epoch0_only_gaozhiliang_sft
+dir=/home/A02_tmpdata1/ckpt/osum_chat_new_start_0907/epoch0_only_gaozhiliang_sft_from_epoch6_hq_language_think
 #checkpoint=/home/A02_tmpdata3/ckpt/osum_chat/epoch0_all_data/step_10624.pt
 #checkpoint=/home/A02_tmpdata3/ckpt/osum_chat/epoch0_all_data/step_14374.pt
 #checkpoint=/home/A02_tmpdata3/ckpt/osum_chat/epoch1_all_data/step_2816.pt
@@ -61,7 +61,9 @@ dir=/home/A02_tmpdata2/ckpt/osum_chat_new_start_0810/epoch0_only_gaozhiliang_sft
 #checkpoint=/home/A02_tmpdata3/ckpt/osum_chat/epoch1_all_data/step_5633.pt
 #checkpoint=/home/A02_tmpdata3/ckpt/osum_chat/epoch2_all_data/step_4999.pt
 # checkpoint=/home/A02_tmpdata3/ckpt/osum_chat_new_start_0810/epoch0_s2t_t2s_t2t/step_1249.pt
-checkpoint=/home/A02_tmpdata3/ckpt/osum_chat/epoch2_all_data/step_13749.pt
+#checkpoint=/home/A02_tmpdata3/ckpt/osum_chat/epoch2_all_data/step_13749.pt
+checkpoint=/home/A02_tmpdata1/ckpt/osum_chat_new_start_0810/epoch6_add_emotion_raw_in_no_think_hq_language_think/step_22499.pt
+
 
 mkdir -p $dir
 data=$dir/data
@@ -126,7 +128,7 @@ reverse_weight=0.0
 blank_penalty=0.0
 length_penalty=0.0
 decode_batch=10
-deepspeed_config=conf/ds_stage2.json
+deepspeed_config=conf/ds_stage2_sft.json
 deepspeed_save_states="model+optimizer"
 
 
