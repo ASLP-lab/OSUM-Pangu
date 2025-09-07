@@ -111,7 +111,7 @@ dataset_conf:
       only_s2t: false # 只针对与s2t dataloader的过滤
       only_t2t: false # 只针对与t2t dataloader的过滤
       only_t2s: false # 只针对与t2s dataloader的过滤
-    use_50_per_change_if_only_X: true # 50%的句子随机替换为其only X
+    use_50_per_change_if_only_X: false # 50%的句子随机替换为其only X
     use_s2s_streaming_random:
       enable: false
       rate: 0.5 # 1.0 表示100%的句子随机替换为其only X

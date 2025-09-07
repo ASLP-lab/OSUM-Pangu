@@ -211,17 +211,17 @@
 <TRANSCRIBE>:
   - 请将音频内容转录为文字。
 #  ["<TRANSCRIBE> <THINK> <LONG>","<TRANSCRIBE> <THINK> <LONG> <PUNCTUATION>","<TRANSCRIBE> <THINK> <MEDIUM>", "<TRANSCRIBE> <THINK> <MEDIUM> <PUNCTUATION>", "<TRANSCRIBE> <THINK> <SHORT>", "<TRANSCRIBE> <THINK> <SHORT> <PUNCTUATION>"]
-<TRANSCRIBE><TRANSCRIBE> <THINK> <LONG>:
+<TRANSCRIBE> <THINK> <LONG>:
   - 请先对这段录音的转录进行思考：首先判断整段语音可能发生的场景，接着分析其中可能存在的易错词，并用拼音标注这些易错词；随后结合语音的具体场景，推断出最可能使用的词汇。完成上述思考后，再将这段录音转录为文字。
-<TRANSCRIBE><TRANSCRIBE> <THINK> <LONG> <PUNCTUATION>:
+<TRANSCRIBE> <THINK> <LONG> <PUNCTUATION>:
   - 请先对这段录音的转录进行思考：首先判断整段语音可能发生的场景，接着分析其中可能存在的易错词，并用拼音标注这些易错词；随后结合语音的具体场景，推断出最可能使用的词汇。完成上述思考后，再将这段录音转录为带标点的文字。
-<TRANSCRIBE><TRANSCRIBE> <THINK> <MEDIUM>:
+<TRANSCRIBE> <THINK> <MEDIUM>:
   - 请先对这段录音的转录进行思考：首先判断整段语音可能发生的场景，接着分析其中可能存在的易错词，并直接结合语音的具体场景，推断出最可能错误的的词汇。完成上述思考后，再将这段录音转录为文字。
-<TRANSCRIBE><TRANSCRIBE> <THINK> <MEDIUM> <PUNCTUATION>:
+<TRANSCRIBE> <THINK> <MEDIUM> <PUNCTUATION>:
   - 请先对这段录音的转录进行思考：首先判断整段语音可能发生的场景，接着分析其中可能存在的易错词，并直接结合语音的具体场景，推断出最可能错误的的词汇。完成上述思考后，再将这段录音转录为带标点的文字。
-<TRANSCRIBE><TRANSCRIBE> <THINK> <SHORT>:
+<TRANSCRIBE> <THINK> <SHORT>:
   - 请先对这段录音的转录进行思考：判断整段语音可能发生的场景。完成上述思考后，再将这段录音转录为文字。
-<TRANSCRIBE><TRANSCRIBE> <THINK> <SHORT> <PUNCTUATION>:
+<TRANSCRIBE> <THINK> <SHORT> <PUNCTUATION>:
   - 请先对这段录音的转录进行思考：判断整段语音可能发生的场景。完成上述思考后，再将这段录音转录为带标点的文字。
 
 
