@@ -5,8 +5,7 @@ import logging
 import librosa
 import torch
 from gxl_ai_utils.utils import utils_file
-import torchaudio
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
 
 config_path = "../conf/ct_config.yaml"
 model_path = "/home/A02_tmpdata3/ckpt/osum_chat_new_start_0810/epoch0_s2t_t2s_t2t/step_1249.pt"
@@ -32,3 +31,4 @@ def load_model_and_tokenizer(checkpoint_path, config_path):
     return model, tokenizer
 
 
+print("加载模型和分词器...")
