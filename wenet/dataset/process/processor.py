@@ -801,6 +801,14 @@ def tokenize(data, tokenizer: HuggingFaceTokenizer, other_tokenze_conf={}, globa
         # ========================处理speech token 结束 ==========================
 
 
+        # =========== 加上流式回复的训练==================
+        if task_name == "<S2TCHAT> <TEXT2TOKEN>":
+            if random.random() < 0.4:
+                task_name = "<S2TCHAT> <TEXT2TOKEN> <THINK>"
+                sample['task'] = task_name
+        # =========== 加上流式回复的训练 end==================
+
+
 
         # =====================处理output_type======================
         # tts
