@@ -1,215 +1,215 @@
-#<TRANSCRIBE>:
-#  - 转录如下音频。
-#  - 转录这段音频中的语音内容为文字。
-#  - 将音频的语音部分转换为文字形式，谢谢。
-#  - 将这段音频的语音内容详细记录为文字稿。
-#  - 执行语音识别任务，将音频转换为文字。
-#  - 请将音频中的内容逐字转写出来。
-#  - 把这段录音转为文字。
-#  - 将以下音频内容识别并输出成文字。
-#  - 请将音频信息转写成文本。
-#  - 提取音频中的语音并转为文字。
-#  - 请识别出音频中的所有语音内容。
-#  - 把音频文件里的语音内容转成文字。
-#  - 帮我把这段音频转录成一份文字稿。
-#  - 将以下录音的内容用文本表示出来。
-#  - 识别并转录此段语音内容。
-#  - 将此段音频的语言转换为可读文本。
-#  - 请将录音中的语言转换成文字记录。
-#  - 对该音频进行语音转写处理。
-#  - 输出该段音频的完整文本。
-#  - 将语音内容精准转录为文本。
-#  - 请将音频的口语内容以文字形式展现。
-#  - 把这段录音的语音转换为书面语言。
-#  - 请将音频的口语部分进行文字化。
-#  - 将这段音频的语言信息记录为文字稿。
-#  - 把语音中的对话还原为文本形式。
-#  - 将该段语音转换为清晰的文字。
-#  - 请转录录音内容，不要遗漏细节。
-#  - 请将以下音频的内容进行文字转写。
-#  - 执行语音到文本的转换任务。
-#  - 把以下这段语音转换成一份文字稿件。
-#  - 转换该段音频为可编辑的文字格式。
-#  - 将录音中的语句准确转写成文本。
-#  - 将该录音的语音信息输出为文字。
-#  - 语音识别任务：请将音频转为文字。
-#  - 帮我识别音频中的说话内容并转为文本。
-#  - 将录音逐字转录为书面语。
-#  - 请帮忙将录音内容逐句整理成文字。
-#  - 请对该段语音内容进行识别和文字转换。
-#  - 识别录音中的语言，并用文字呈现。
-#  - 把这段音频内容完整地整理为文本。
-#  - 将录音内容准确无误地记录成文字。
-#  - 请对音频内容进行逐句转写。
-#  - 将语音内容按逻辑结构整理成文本。
-#  - 将该段录音内容翻译成文字。
-#  - 提取出音频中每一句话并以文字表示。
-#  - 请帮忙转录音频的全部内容。
-#  - 把这段语音内容写成文字稿。
-#  - 把以下这段语音整理成可读文字。
-#  - 请识别并写出该录音中的全部语言内容。
-#  - 请进行语音识别，将语音内容记录下来。
-#  - 把录音文件的语音转换为文字记录。
-#  - 请将音频的语音转换为整洁的文本。
-#  - Transcribe the following audio.
-#  - Convert this audio clip into text.
-#  - Please write down what is said in the audio.
-#  - Transcribe the spoken content of this audio file.
-#  - Perform speech-to-text conversion on this audio.
-#  - Please turn the audio into written form.
-#  - Convert the spoken words in the audio to text.
-#  - Write out everything said in the recording.
-#  - Please transcribe this voice recording.
-#  - Turn the speech in this file into readable text.
-#  - Accurately transcribe all spoken content.
-#  - Please capture the audio content in a text format.
-#  - Provide a written transcript of this audio file.
-#  - Output the full speech content from the audio.
-#  - Please convert this recorded audio into text.
-#  - Write a transcription of the speech in this audio.
-#  - Extract and transcribe all speech segments.
-#  - Transform this recording into a text document.
-#  - Transcribe the conversation in the audio.
-#  - Turn this voice memo into a written format.
-#  - Transcribe what is being said in this file.
-#  - Write down the dialogue in the audio clip.
-#  - Generate a full transcript of the spoken audio.
-#  - Turn this voice into written words.
-#  - Perform a speech recognition task and output text.
-#  - Capture the entire audio in a transcribed form.
-#  - Please transcribe the audio into a readable document.
-#  - Convert voice content into structured text.
-#  - Listen to the audio and write everything spoken.
-#  - Please provide a full speech transcription.
-#  - Recognize and transcribe all words from the audio.
-#  - Produce a written version of this audio.
-#  - Transcribe the recording word by word.
-#  - Write out all speech from this clip.
-#  - Convert the audio to clean written form.
-#  - Transcribe the voice recording without missing details.
-#  - Provide a text version of this audio.
-#  - Capture the oral content in text format.
-#  - Turn the audio into a precise transcript.
-#  - Generate an accurate text of the speech content.
-#  - Please output the dialogue from the recording.
-#  - Transcribe the speech as clearly and fully as possible.
-#  - Turn the voice from the clip into words.
-#  - Provide a transcription of the full spoken content.
-#  - Write down what you hear from this file.
-#  - Listen and transcribe everything said.
-#  - Please convert this speech to written form.
-#  - Write a word-for-word transcript of the recording.
-#  - Please transcribe this conversation.
-#  - Generate a written version of the voice clip.
-#  - Write down the entire verbal content.
-#  - Create a text record of the audio.
-#  - Please create a full transcript of this voice note.
-#  - Extract the spoken words and write them out.
-#  - Transcribe the audio to a readable text format.
-#  - Turn this sound recording into a document.
-#  - Create a word-by-word transcript.
-#  - Listen to the voice and write a detailed transcript.
-#  - Provide a complete transcription of what was said.
-#  - Translate the speech in this clip into text.
-#  - Make a written record of the audio content.
-#  - Give a written version of this audio file.
-#  - Transcribe all the sentences in the audio.
-#  - Transcribe this voice file as clean text.
-#  - Turn the oral expressions into written language.
-#  - Create a document containing all spoken words.
-#  - Render this audio as readable text.
-#  - Please provide text for every uttered phrase.
-#  - Convert this speech into formatted text.
-#  - Identify all speech in this recording and write it down.
-#  - Output each spoken sentence as text.
-#  - Make a text file of the audio content.
-#  - Turn this clip into a transcript.
-#  - Write out every word from this voice clip.
-#  - Transform all spoken language into text.
-#  - Do a complete speech-to-text conversion.
-#  - Create a literal transcript of the voice.
-#  - Perform voice-to-text conversion on this audio.
-#  - Please present the spoken content in text.
-#  - Listen and provide the transcript.
-#  - Record the speech in this audio as written words.
-#  - Turn the oral communication into text.
-#  - Generate a clean text of this audio’s speech.
-#  - Convert audio input into a script.
-#  - Extract all verbal data and write it down.
-#  - Make a full, accurate transcript of this clip.
-#  - Format this audio as readable speech.
-#  - Translate the voice message into text.
-#  - Please perform automatic speech transcription.
-#  - Identify and transcribe the voice accurately.
-#  - Do an accurate voice transcription.
-#  - Create a text version of this sound input.
-#  - Please transform this spoken message into a transcript.
-#  - 请把以下音频内容识别并转为文字。
-#  - 识别音频中说的话，并转成文字稿。
-#  - 将语音内容整理为文字，越详细越好。
-#  - 请对这段音频进行语音识别。
-#  - 将这段语音转换成书面文字格式。
-#  - 请将该录音中的语音转录为文字。
-#  - 对该音频进行听写，并输出文字结果。
-#  - 将录音内容准确还原为文字。
-#  - 执行语音到文本的任务。
-#  - 请将这段声音转换为文字记录。
-#  - 请识别语音信息并以文字方式表达。
-#  - 请将音频中的语音逐句写出来。
-#  - 对这段录音进行完整的文字转写。
-#  - 将以下语音数据转为结构化文本。
-#  - 请将该段语音信息还原为文本文件。
-#  - 把这段音频听写成详细文字内容。
-#  - 请输出该音频的文字版本。
-#  - 把录音中所有说的话写下来。
-#  - 请将音频文件的内容识别为文字。
-#  - 将语音内容整理为一份正式的文字稿。
-#  - 识别音频语言并生成对应文本。
-#  - 请把这段音频的语音部分逐字写出来。
-#  - 将该语音内容转换为可读文字。
-#  - 执行转写操作，把语音变成文字。
-#  - 请生成该段录音的文字副本。
-#  - 请帮我把录音的内容写成文字。
-#  - 识别并还原语音数据为文本信息。
-#  - 请用文字完整还原音频中的讲话内容。
-#  - 把该段音频内容转换成可读形式。
-#  - 请以文字方式呈现该段语音信息。
-#  - 请对这段语音进行内容提取和文字表达。
-#  - 将录音中的对话内容转写为文字。
-#  - 请完成该段语音的听写任务。
-#  - 请将语音内容整理为书面形式。
-#  - 将音频的内容提取成一份清晰的文字记录。
-#  - 对该段语音生成完整的转录结果。
-#  - 请识别这段音频并输出文字内容。
-#  - 把音频转为文字，不需翻译。
-#  - 把该段录音逐字转换为文本。
-#  - 将音频中的语言内容文字化输出。
-#  - 帮我将音频内容转写成语音稿。
-#  - 将音频中所有语音清楚地转录成文字。
-#  - 请提供这段语音的文字形式。
-#  - 请将录音中的口语信息标准化为书面语。
-#  - 把这段语音内容变成书面文字。
-#  - 将语音文件中的内容整理成逐字稿。
-#  - 请识别音频中所有发言并输出文字。
-#  - 生成该语音内容的标准文字版本。
-#  - 将该段语音内容用文字完整描述出来。
-#  - 请将该录音内容转为文本资料。
-#  - 请将音频数据识别并转成文字。
-#  - 识别音频内容并以文本格式输出。
-#  - 将这段录音还原为句子形式的文字稿。
-#  - 请用中文文字描述音频中的全部内容。
-#  - 将该语音逐字逐句转换为文字信息。
-#  - 请为这段音频生成语音识别结果。
-#  - 对音频内容进行语言识别并输出结果。
-#  - 请转录音频中的讲话并输出为文字。
-#  - 将音频文件识别为自然语言文字内容。
-#  - 将语音中的对话内容输出为文本。
-#  - 把该段语音还原为逐字记录的文本。
-#
-#
-
 <TRANSCRIBE>:
-  - 请将音频内容转录为文字。
+  - 转录如下音频。
+  - 转录这段音频中的语音内容为文字。
+  - 将音频的语音部分转换为文字形式，谢谢。
+  - 将这段音频的语音内容详细记录为文字稿。
+  - 执行语音识别任务，将音频转换为文字。
+  - 请将音频中的内容逐字转写出来。
+  - 把这段录音转为文字。
+  - 将以下音频内容识别并输出成文字。
+  - 请将音频信息转写成文本。
+  - 提取音频中的语音并转为文字。
+  - 请识别出音频中的所有语音内容。
+  - 把音频文件里的语音内容转成文字。
+  - 帮我把这段音频转录成一份文字稿。
+  - 将以下录音的内容用文本表示出来。
+  - 识别并转录此段语音内容。
+  - 将此段音频的语言转换为可读文本。
+  - 请将录音中的语言转换成文字记录。
+  - 对该音频进行语音转写处理。
+  - 输出该段音频的完整文本。
+  - 将语音内容精准转录为文本。
+  - 请将音频的口语内容以文字形式展现。
+  - 把这段录音的语音转换为书面语言。
+  - 请将音频的口语部分进行文字化。
+  - 将这段音频的语言信息记录为文字稿。
+  - 把语音中的对话还原为文本形式。
+  - 将该段语音转换为清晰的文字。
+  - 请转录录音内容，不要遗漏细节。
+  - 请将以下音频的内容进行文字转写。
+  - 执行语音到文本的转换任务。
+  - 把以下这段语音转换成一份文字稿件。
+  - 转换该段音频为可编辑的文字格式。
+  - 将录音中的语句准确转写成文本。
+  - 将该录音的语音信息输出为文字。
+  - 语音识别任务：请将音频转为文字。
+  - 帮我识别音频中的说话内容并转为文本。
+  - 将录音逐字转录为书面语。
+  - 请帮忙将录音内容逐句整理成文字。
+  - 请对该段语音内容进行识别和文字转换。
+  - 识别录音中的语言，并用文字呈现。
+  - 把这段音频内容完整地整理为文本。
+  - 将录音内容准确无误地记录成文字。
+  - 请对音频内容进行逐句转写。
+  - 将语音内容按逻辑结构整理成文本。
+  - 将该段录音内容翻译成文字。
+  - 提取出音频中每一句话并以文字表示。
+  - 请帮忙转录音频的全部内容。
+  - 把这段语音内容写成文字稿。
+  - 把以下这段语音整理成可读文字。
+  - 请识别并写出该录音中的全部语言内容。
+  - 请进行语音识别，将语音内容记录下来。
+  - 把录音文件的语音转换为文字记录。
+  - 请将音频的语音转换为整洁的文本。
+  - Transcribe the following audio.
+  - Convert this audio clip into text.
+  - Please write down what is said in the audio.
+  - Transcribe the spoken content of this audio file.
+  - Perform speech-to-text conversion on this audio.
+  - Please turn the audio into written form.
+  - Convert the spoken words in the audio to text.
+  - Write out everything said in the recording.
+  - Please transcribe this voice recording.
+  - Turn the speech in this file into readable text.
+  - Accurately transcribe all spoken content.
+  - Please capture the audio content in a text format.
+  - Provide a written transcript of this audio file.
+  - Output the full speech content from the audio.
+  - Please convert this recorded audio into text.
+  - Write a transcription of the speech in this audio.
+  - Extract and transcribe all speech segments.
+  - Transform this recording into a text document.
+  - Transcribe the conversation in the audio.
+  - Turn this voice memo into a written format.
+  - Transcribe what is being said in this file.
+  - Write down the dialogue in the audio clip.
+  - Generate a full transcript of the spoken audio.
+  - Turn this voice into written words.
+  - Perform a speech recognition task and output text.
+  - Capture the entire audio in a transcribed form.
+  - Please transcribe the audio into a readable document.
+  - Convert voice content into structured text.
+  - Listen to the audio and write everything spoken.
+  - Please provide a full speech transcription.
+  - Recognize and transcribe all words from the audio.
+  - Produce a written version of this audio.
+  - Transcribe the recording word by word.
+  - Write out all speech from this clip.
+  - Convert the audio to clean written form.
+  - Transcribe the voice recording without missing details.
+  - Provide a text version of this audio.
+  - Capture the oral content in text format.
+  - Turn the audio into a precise transcript.
+  - Generate an accurate text of the speech content.
+  - Please output the dialogue from the recording.
+  - Transcribe the speech as clearly and fully as possible.
+  - Turn the voice from the clip into words.
+  - Provide a transcription of the full spoken content.
+  - Write down what you hear from this file.
+  - Listen and transcribe everything said.
+  - Please convert this speech to written form.
+  - Write a word-for-word transcript of the recording.
+  - Please transcribe this conversation.
+  - Generate a written version of the voice clip.
+  - Write down the entire verbal content.
+  - Create a text record of the audio.
+  - Please create a full transcript of this voice note.
+  - Extract the spoken words and write them out.
+  - Transcribe the audio to a readable text format.
+  - Turn this sound recording into a document.
+  - Create a word-by-word transcript.
+  - Listen to the voice and write a detailed transcript.
+  - Provide a complete transcription of what was said.
+  - Translate the speech in this clip into text.
+  - Make a written record of the audio content.
+  - Give a written version of this audio file.
+  - Transcribe all the sentences in the audio.
+  - Transcribe this voice file as clean text.
+  - Turn the oral expressions into written language.
+  - Create a document containing all spoken words.
+  - Render this audio as readable text.
+  - Please provide text for every uttered phrase.
+  - Convert this speech into formatted text.
+  - Identify all speech in this recording and write it down.
+  - Output each spoken sentence as text.
+  - Make a text file of the audio content.
+  - Turn this clip into a transcript.
+  - Write out every word from this voice clip.
+  - Transform all spoken language into text.
+  - Do a complete speech-to-text conversion.
+  - Create a literal transcript of the voice.
+  - Perform voice-to-text conversion on this audio.
+  - Please present the spoken content in text.
+  - Listen and provide the transcript.
+  - Record the speech in this audio as written words.
+  - Turn the oral communication into text.
+  - Generate a clean text of this audio’s speech.
+  - Convert audio input into a script.
+  - Extract all verbal data and write it down.
+  - Make a full, accurate transcript of this clip.
+  - Format this audio as readable speech.
+  - Translate the voice message into text.
+  - Please perform automatic speech transcription.
+  - Identify and transcribe the voice accurately.
+  - Do an accurate voice transcription.
+  - Create a text version of this sound input.
+  - Please transform this spoken message into a transcript.
+  - 请把以下音频内容识别并转为文字。
+  - 识别音频中说的话，并转成文字稿。
+  - 将语音内容整理为文字，越详细越好。
+  - 请对这段音频进行语音识别。
+  - 将这段语音转换成书面文字格式。
+  - 请将该录音中的语音转录为文字。
+  - 对该音频进行听写，并输出文字结果。
+  - 将录音内容准确还原为文字。
+  - 执行语音到文本的任务。
+  - 请将这段声音转换为文字记录。
+  - 请识别语音信息并以文字方式表达。
+  - 请将音频中的语音逐句写出来。
+  - 对这段录音进行完整的文字转写。
+  - 将以下语音数据转为结构化文本。
+  - 请将该段语音信息还原为文本文件。
+  - 把这段音频听写成详细文字内容。
+  - 请输出该音频的文字版本。
+  - 把录音中所有说的话写下来。
+  - 请将音频文件的内容识别为文字。
+  - 将语音内容整理为一份正式的文字稿。
+  - 识别音频语言并生成对应文本。
+  - 请把这段音频的语音部分逐字写出来。
+  - 将该语音内容转换为可读文字。
+  - 执行转写操作，把语音变成文字。
+  - 请生成该段录音的文字副本。
+  - 请帮我把录音的内容写成文字。
+  - 识别并还原语音数据为文本信息。
+  - 请用文字完整还原音频中的讲话内容。
+  - 把该段音频内容转换成可读形式。
+  - 请以文字方式呈现该段语音信息。
+  - 请对这段语音进行内容提取和文字表达。
+  - 将录音中的对话内容转写为文字。
+  - 请完成该段语音的听写任务。
+  - 请将语音内容整理为书面形式。
+  - 将音频的内容提取成一份清晰的文字记录。
+  - 对该段语音生成完整的转录结果。
+  - 请识别这段音频并输出文字内容。
+  - 把音频转为文字，不需翻译。
+  - 把该段录音逐字转换为文本。
+  - 将音频中的语言内容文字化输出。
+  - 帮我将音频内容转写成语音稿。
+  - 将音频中所有语音清楚地转录成文字。
+  - 请提供这段语音的文字形式。
+  - 请将录音中的口语信息标准化为书面语。
+  - 把这段语音内容变成书面文字。
+  - 将语音文件中的内容整理成逐字稿。
+  - 请识别音频中所有发言并输出文字。
+  - 生成该语音内容的标准文字版本。
+  - 将该段语音内容用文字完整描述出来。
+  - 请将该录音内容转为文本资料。
+  - 请将音频数据识别并转成文字。
+  - 识别音频内容并以文本格式输出。
+  - 将这段录音还原为句子形式的文字稿。
+  - 请用中文文字描述音频中的全部内容。
+  - 将该语音逐字逐句转换为文字信息。
+  - 请为这段音频生成语音识别结果。
+  - 对音频内容进行语言识别并输出结果。
+  - 请转录音频中的讲话并输出为文字。
+  - 将音频文件识别为自然语言文字内容。
+  - 将语音中的对话内容输出为文本。
+  - 把该段语音还原为逐字记录的文本。
+
+
+
+#<TRANSCRIBE>:
+#  - 请将音频内容转录为文字。
 #  ["<TRANSCRIBE> <THINK> <LONG>","<TRANSCRIBE> <THINK> <LONG> <PUNCTUATION>","<TRANSCRIBE> <THINK> <MEDIUM>", "<TRANSCRIBE> <THINK> <MEDIUM> <PUNCTUATION>", "<TRANSCRIBE> <THINK> <SHORT>", "<TRANSCRIBE> <THINK> <SHORT> <PUNCTUATION>"]
 <TRANSCRIBE> <THINK> <LONG>:
   - 请先对这段录音的转录进行思考：首先判断整段语音可能发生的场景，接着分析其中可能存在的易错词，并用拼音标注这些易错词；随后结合语音的具体场景，推断出最可能使用的词汇。完成上述思考后，再将这段录音转录为文字。
