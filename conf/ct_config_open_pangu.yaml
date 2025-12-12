@@ -29,7 +29,7 @@ fire_module: link  # link  encoder llm  link_and_encoder link_and_encoder_and_lo
 
 # other config
 grad_clip: 5
-accum_grad: 8
+accum_grad: 4
 log_interval: 10
 save_interval: 1250 #1250 #2500
 max_epoch: 1
@@ -42,7 +42,7 @@ optim_conf:
   - 0.9
   - 0.99
   eps: 1.0e-06
-  lr: 1.0e-06
+  lr: 5.0e-04
   weight_decay: 0.01
 scheduler: warmuplr
 scheduler_conf:
@@ -56,7 +56,7 @@ dataset_conf:
     batch_size: 26
     batch_type: dynamic
     max_frames_in_batch: 28000000 #3000 #9000 #3000 #3300 # 3900
-    max_seq_in_batch: 5100 #1500 #4000 #1100 #1600 # 1900
+    max_seq_in_batch: 5500 #1500 #4000 #1100 #1600 # 1900
   feats_type: log_mel_spectrogram
   filter_conf:
     max_length: 4000
@@ -149,4 +149,6 @@ encoder_conf:
   static_chunk_size: -1
   use_dynamic_chunk: false
   use_dynamic_left_chunk: false
+
+dtype: bf16
 

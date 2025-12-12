@@ -88,6 +88,7 @@ class LLMASR_Model(nn.Module):
             torch_dtype=torch.bfloat16,
             trust_remote_code=True,
             output_hidden_states=True,
+            local_files_only=True # only for pangu
         )
 
         self.max_length = 400
@@ -119,7 +120,11 @@ class LLMASR_Model(nn.Module):
 
         # tokenizer
         self.tokenizer = AutoTokenizer.from_pretrained(
-            llm_path, use_fast=False, trust_remote_code=True)
+            llm_path,
+            use_fast=False,
+            trust_remote_code=True,
+            local_files_only=True # only for pangu
+        )
         """
         设置分词器的pad_token和padding的方向。
         """
@@ -256,7 +261,7 @@ class LLMASR_Model(nn.Module):
 
             for item in history:
                 wav_feat = item['wav'].to(device)  # shape: (L, D)
-                wav_feat = wav_feat.unsqueeze(0).to(device) # shape: (1, L, D)
+                wav_feat = wav_feat.unsqueeze(0).to(device)# shape: (1, L, D)
                 wav_embed, wav_mask = self._get_embedding_from_wav(wav_feat, torch.tensor([wav_feat.size(1)], device=device, dtype=torch.long))
                 wav_embed = wav_embed.squeeze(0)  # shape: (L, D)
                 if len(history_embeds) != 0:
@@ -1523,6 +1528,7 @@ class LLMASR_Model(nn.Module):
         wav_embedding: (b, l, v)
         wav_mask:  (b, l), wav为有效值的位置为true
         """
+        wavs = wavs.to(torch.bfloat16)
         encoder_out, encoder_mask = self.encoder(wavs, wavs_len)
 
         speech_embeds, encoder_mask = self.down_sample_2(encoder_out, encoder_mask)

@@ -362,21 +362,21 @@ def BigDataset(data_type,
     t2t_conf['filter_conf']['other_filter_conf']['only_t2t'] = True
     t2t_conf['other_tokenze_conf']["only_info"]['only_t2t'] = True
 
-    tmp_file_s2t = do_get_fake_file()
-    s2s_list = utils_file.load_list_file_clean(data_list_file_s2s)
+    # tmp_file_s2t = do_get_fake_file()
+    # s2s_list = utils_file.load_list_file_clean(data_list_file_s2s)
     # s2s_list_little = s2s_list[::3]
-    s2s_list_little = []
-    s2t_list = utils_file.load_list_file_clean(data_list_file_s2t)
-    s2t_full_list = s2t_list + s2s_list_little
-    utils_file.write_list_to_file(s2t_full_list, tmp_file_s2t)
+    # s2s_list_little = []
+    # s2t_list = utils_file.load_list_file_clean(data_list_file_s2t)
+    # s2t_full_list = s2t_list + s2s_list_little
+    # utils_file.write_list_to_file(s2t_full_list, tmp_file_s2t)
 
 
-    s2t_dataset = get_dataset(data_type, tmp_file_s2t, tokenizer, s2t_conf, partition=partition)
+    s2t_dataset = get_dataset(data_type, data_list_file_s2t, tokenizer, s2t_conf, partition=partition)
     t2s_dataset = get_dataset(data_type, data_list_file_t2s, tokenizer, t2s_conf, partition=partition)
     s2s_dataset = get_dataset(data_type, data_list_file_s2s, tokenizer, s2s_conf, partition=partition)
     t2t_dataset = get_dataset(data_type, data_list_file_t2t, tokenizer, t2t_conf, partition=partition)
     dataset = BigDataList(s2t_dataset, t2s_dataset, s2s_dataset, t2t_dataset,
-                          weight_num=[len(read_lists(tmp_file_s2t)),
+                          weight_num=[len(read_lists(data_list_file_s2t)),
                                       len(read_lists(data_list_file_t2s)),
                                       len(read_lists(data_list_file_s2s)),
                                       len(read_lists(data_list_file_t2t))

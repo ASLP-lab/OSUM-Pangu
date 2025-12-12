@@ -684,6 +684,7 @@ def wenet_join(group_join, info_dict):
 
     return False
 
+from gxl_ai_utils.utils import utils_file
 
 def batch_forward(model, batch, scaler, info_dict, device):
     train_engine = info_dict.get('train_engine', "torch_ddp")
@@ -696,6 +697,7 @@ def batch_forward(model, batch, scaler, info_dict, device):
         dtype = torch.bfloat16
     else:  # fp32
         dtype = None
+    utils_file.logging_limit_print(f'!!!!!!!!!!!!!!!!dtype: {dtype}')
 
     # autocast context
     # The more details about amp can be found in

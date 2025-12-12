@@ -50,7 +50,11 @@ def init_tokenizer(configs) -> BaseTokenizer:
             seg_dict=configs['tokenizer_conf']['seg_dict_path'])
     elif tokenizer_type == 'huggingface':
         tokenizer = HuggingFaceTokenizer(
-            model=configs['tokenizer_conf']['llm_path'])
+            model=configs['tokenizer_conf']['llm_path'],
+            use_fast=False,
+            trust_remote_code=True,
+            local_files_only=True  # only for pangu
+        )
     else:
         raise NotImplementedError
     logging.info("use {} tokenizer".format(configs["tokenizer"]))
