@@ -136,15 +136,14 @@ Instruction Following Rate (IFR) measures the ability of the model to parse natu
 
 The metric is defined as:
 
-\[
+$$
 IFR = \left( \frac{N_{correct}}{N_{total}} \right) \times 100\%
-\]
+$$
 
 where:
 
-- \(N_{correct}\) represents the number of correctly executed instructions  
-- \(N_{total}\) represents the total number of evaluation samples  
-
+- $N_{correct}$ represents the number of correctly executed instructions  
+- $N_{total}$ represents the total number of evaluation samples
 Compared with mainstream open-source models, **I-OSUM-Pangu achieves significantly better performance**:
 
 <p align="center">
