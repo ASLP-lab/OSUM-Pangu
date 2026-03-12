@@ -16,7 +16,7 @@ openai-whisper
 colorama
 peft
 sox
-#deepspeed
+deepspeed
 gxl_ai_utils
 
 
