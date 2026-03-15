@@ -273,3 +273,29 @@ Run the main training script:
 ```bash
 OSUM-Pangu/train.sh
 ```
+# Citation
+```
+@article{geng2025osum,
+  title={OSUM-EChat: Enhancing End-to-End Empathetic Spoken Chatbot via Understanding-Driven Spoken Dialogue},
+  author={Geng, Xuelong and Shao, Qijie and Xue, Hongfei and Wang, Shuiyuan and Xie, Hanke and Guo, Zhao and Zhao, Yi and Li, Guojian and Tian, Wenjie and Wang, Chengyou and others},
+  journal={arXiv preprint arXiv:2508.09600},
+  year={2025}
+}
+```
+
+```
+@article{geng2025osum,
+  title={{OSUM}: {Advancing} Open Speech Understanding Models with Limited Resources in Academia},
+  author={Geng, Xuelong and Wei, Kun and Shao, Qijie and Liu, Shuiyun and Lin, Zhennan and Zhao, Zhixian and Li, Guojian and Tian, Wenjie and Chen, Peikun and Li, Yangze and others},
+  journal={arXiv preprint arXiv:2501.13306},
+  year={2025}
+}
+```
+# Contact Us
+
+If you are interested in leaving a message to our research team, feel free to email `xlgeng@mail.nwpu.edu.cn`.
+<p align="center">
+    <a href="http://www.nwpu-aslp.org/">
+        <img src="images/aslp.png" width="400"/>
+    </a>
+</p>
