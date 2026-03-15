@@ -275,25 +275,21 @@ OSUM-Pangu/train.sh
 ```
 # Citation
 ```
-@article{geng2025osum,
-  title={OSUM-EChat: Enhancing End-to-End Empathetic Spoken Chatbot via Understanding-Driven Spoken Dialogue},
-  author={Geng, Xuelong and Shao, Qijie and Xue, Hongfei and Wang, Shuiyuan and Xie, Hanke and Guo, Zhao and Zhao, Yi and Li, Guojian and Tian, Wenjie and Wang, Chengyou and others},
-  journal={arXiv preprint arXiv:2508.09600},
-  year={2025}
+@misc{liao2026osumpanguopensourcemultidimensionspeech,
+      title={OSUM-Pangu: An Open-Source Multidimension Speech Understanding Foundation Model Built upon OpenPangu on Ascend NPUs}, 
+      author={Yujie Liao and Xuelong Geng and Hongfei Xue and Shuiyuan Wang and Lei Xie},
+      year={2026},
+      eprint={2603.10862},
+      archivePrefix={arXiv},
+      primaryClass={cs.SD},
+      url={https://arxiv.org/abs/2603.10862}, 
 }
 ```
 
-```
-@article{geng2025osum,
-  title={{OSUM}: {Advancing} Open Speech Understanding Models with Limited Resources in Academia},
-  author={Geng, Xuelong and Wei, Kun and Shao, Qijie and Liu, Shuiyun and Lin, Zhennan and Zhao, Zhixian and Li, Guojian and Tian, Wenjie and Chen, Peikun and Li, Yangze and others},
-  journal={arXiv preprint arXiv:2501.13306},
-  year={2025}
-}
-```
+
 # Contact Us
 
-If you are interested in leaving a message to our research team, feel free to email `xlgeng@mail.nwpu.edu.cn`.
+If you are interested in leaving a message to our research team, feel free to email `liaoyujie@mail.nwpu.edu.cn`.
 <p align="center">
     <a href="http://www.nwpu-aslp.org/">
         <img src="images/aslp.png" width="400"/>
