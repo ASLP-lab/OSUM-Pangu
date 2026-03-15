@@ -117,8 +117,8 @@ OSUM-Pangu demonstrates competitive performance across diverse tasks compared to
 
 | Task       | Model          | Public Test Set                                                                 | Metric       | Public Result                                                                 |
 |------------|----------------|---------------------------------------------------------------------------------|--------------|-------------------------------------------------------------------------------|
-| **ASR**    | Qwen2-Audio    |                                                                                 | WER/CER (%)  | 8.84 / 8.40 <br> 3.0 / 3.0 / 2.9 <br> **1.6 / 3.6**                           |
-|            | OSUM           | WenetSpeech(n/m) <br> AISHELL-2(m/i/a) <br> LibriSpeech (c/o)                   |              | 6.46 / **5.34** <br> **2.81 / 2.75 / 2.73** <br> 2.19 / 5.53                  |
+| **ASR**    | Qwen2-Audio    |  WenetSpeech(n/m) <br> AISHELL-2(m/i/a) <br> LibriSpeech (c/o)                  | WER/CER (%)  | 8.84 / 8.40 <br> 3.0 / 3.0 / 2.9 <br> **1.6 / 3.6**                           |
+|            | OSUM           |                                                                                 |              | 6.46 / **5.34** <br> **2.81 / 2.75 / 2.73** <br> 2.19 / 5.53                  |
 |            | **OSUM-Pangu** |                                                                                 |              | 7.40 / 10.49 <br> 3.01 / 2.98 / 2.95 <br> 3.51 / 8.36                         |
 | **VED**    | Qwen2-Audio    | VocalSound                                                                      | ACC (%)      | **93.3**                                                                      |
 |            | OSUM           |                                                                                 |              | 82.58                                                                         |
